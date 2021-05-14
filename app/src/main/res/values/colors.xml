@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="red">#FE0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="spinner_backgroud">#9F000000</color>
+    <color name="gray">#DCDCDC</color>
+    <color name="gray_border">#B2B2B2</color>
+    <color name="textbox_hint">#4A4A4A</color>
+    <color name="background_gray">#EDEDED</color>
+    <color name="searchbox">#E5E5E5</color>
+    <color name="category_border">#C7C7C7</color>
+    <color name="darkgray">#C2C2C2</color>
+    <color name="inquiry_head_text">#949494</color>
+    <color name="light_blue">#D3EFFB</color>
+    <color name="dark_blue">#45A6D9</color>
+    <color name="name_head">#4FABDE</color>
+    <color name="profile_head">#494949</color>
+    <color name="profile_small_text">#9D9D9D</color>
+    <color name="footer_unselect_text">#B8B8B8</color>
+    <color name="button">#48A7D7</color>
+    <color name="tanding_news_number_of">#66000000</color>
+    <color name="transperent_black_for_taending_news">#4F000000</color>
+    <color name="color_title_desc">#3c3c3c</color>
+    <color name="color_datetime">#a3a3a3</color>
+</resources>

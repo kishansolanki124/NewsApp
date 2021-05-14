@@ -1,0 +1,105 @@
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/background_gray">
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:padding="3dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            />
+        <LinearLayout
+            android:id="@+id/lin_Search"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_searchbox" >
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="15dp"
+                android:src="@drawable/search"
+                android:visibility="visible"/>
+            <EditText
+                android:id="@+id/edt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search_stories"
+                android:layout_marginLeft="5dp"
+                android:textSize="15dp"
+                android:gravity="center_vertical"
+                android:inputType="text"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:background="@android:color/transparent"
+                android:textColor="@color/textbox_hint"
+                android:textColorHint="@color/textbox_hint"/>
+        </LinearLayout>
+        <!--TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fashion"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_above="@+id/txttitle"/>
+        <TextView
+            android:id="@+id/txttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/-->
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/txt_norecfound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:textColor="@color/textbox_hint"
+            android:text="Loading..."
+            android:visibility="visible"/>
+        <TextView
+            android:id="@+id/search_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Search : Fashion"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_for_you"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <include layout="@layout/bottom_menu" />
+</LinearLayout>

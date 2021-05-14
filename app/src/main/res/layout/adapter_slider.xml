@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="250dp">
+
+    <!--Image we will display is our slider view-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"
+            android:background="@drawable/slider_gradient"
+            android:contentDescription="@string/app_name" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/slider_gradient"/>
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/txt_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Fashion"
+        android:layout_marginLeft="10dp"
+        android:layout_above="@+id/txt_title"
+        android:textSize="13dp"/>
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        android:paddingBottom="15dp"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/>
+
+</RelativeLayout>
