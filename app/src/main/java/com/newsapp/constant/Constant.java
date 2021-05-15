@@ -19,7 +19,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -137,7 +136,7 @@ public class Constant {
             img_upload.setImageResource(R.drawable.menu_icon_upload);
             img_profile.setImageResource(R.drawable.menu_icon_user);
 
-            txt_home.setTextColor(ContextCompat.getColor(c, R.color.dark_blue));
+            txt_home.setTextColor(ContextCompat.getColor(c, R.color.pink));
             txt_search.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_upload.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_profile.setTextColor(ContextCompat.getColor(c, R.color.black));
@@ -148,7 +147,7 @@ public class Constant {
             img_profile.setImageResource(R.drawable.menu_icon_user);
 
             txt_home.setTextColor(ContextCompat.getColor(c, R.color.black));
-            txt_search.setTextColor(ContextCompat.getColor(c, R.color.dark_blue));
+            txt_search.setTextColor(ContextCompat.getColor(c, R.color.pink));
             txt_upload.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_profile.setTextColor(ContextCompat.getColor(c, R.color.black));
         } else if (current == 2) {
@@ -159,7 +158,7 @@ public class Constant {
 
             txt_home.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_search.setTextColor(ContextCompat.getColor(c, R.color.black));
-            txt_upload.setTextColor(ContextCompat.getColor(c, R.color.dark_blue));
+            txt_upload.setTextColor(ContextCompat.getColor(c, R.color.pink));
             txt_profile.setTextColor(ContextCompat.getColor(c, R.color.black));
         } else if (current == 3) {
             img_home.setImageResource(R.drawable.menu_icon_home);
@@ -170,36 +169,24 @@ public class Constant {
             txt_home.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_search.setTextColor(ContextCompat.getColor(c, R.color.black));
             txt_upload.setTextColor(ContextCompat.getColor(c, R.color.black));
-            txt_profile.setTextColor(ContextCompat.getColor(c, R.color.dark_blue));
+            txt_profile.setTextColor(ContextCompat.getColor(c, R.color.pink));
         }
 
-        lin_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity) c).finish();
-                c.startActivity(new Intent(c, Home.class));
-            }
+        lin_home.setOnClickListener(view -> {
+            ((Activity) c).finish();
+            c.startActivity(new Intent(c, Home.class));
         });
-        lin_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity) c).finish();
-                c.startActivity(new Intent(c, Search.class));
-            }
+        lin_search.setOnClickListener(view -> {
+            ((Activity) c).finish();
+            c.startActivity(new Intent(c, Search.class));
         });
-        lin_upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity) c).finish();
-                c.startActivity(new Intent(c, UploadStory.class));
-            }
+        lin_upload.setOnClickListener(view -> {
+            ((Activity) c).finish();
+            c.startActivity(new Intent(c, UploadStory.class));
         });
-        lin_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Activity) c).finish();
-                c.startActivity(new Intent(c, Profile.class));
-            }
+        lin_profile.setOnClickListener(view -> {
+            ((Activity) c).finish();
+            c.startActivity(new Intent(c, Profile.class));
         });
     }
 

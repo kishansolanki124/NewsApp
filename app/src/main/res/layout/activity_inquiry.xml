@@ -1,201 +1,219 @@
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" >
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_gray"
         android:paddingBottom="20dp">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imglogo"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/screen_icon_logo"
-            android:layout_marginTop="20dp"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_100"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@mipmap/screen_icon_logo" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgback"
             android:layout_width="40dp"
             android:layout_height="50dp"
-            android:padding="3dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/ic_baseline_keyboard_backspace_24"
-            />
+            android:padding="3dp"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:paddingRight="30dp"
-            android:paddingLeft="30dp"
-            android:justificationMode="inter_word"
-            android:text="News App is the first sentence search engine that helps you to update with fresh stories from your city"
             android:layout_below="@id/imglogo"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:text="News App is the first sentence search engine that helps you to update with fresh stories from your city"
             android:textColor="@color/textbox_hint" />
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp">
+        android:paddingVertical="@dimen/dp_15">
+
         <LinearLayout
             android:id="@+id/lin_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtabout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ABOUT"
-            android:background="@drawable/rounded_tab"
-            android:textColor="@color/white"
-            android:gravity="center"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtabout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_tab"
+                android:gravity="center"
+                android:text="ABOUT"
+                android:textColor="@color/white" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_termscondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txttnc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TERMS &amp; PRIVACY"
-                android:textColor="@color/textbox_hint"
                 android:background="@drawable/rounded_tab_unselec"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="TERMS &amp; PRIVACY"
+                android:textColor="@color/textbox_hint" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtcontact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CONTACT"
-                android:gravity="center"
                 android:background="@drawable/rounded_tab_unselec"
-                android:textColor="@color/black"/>
+                android:gravity="center"
+                android:text="CONTACT"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:paddingTop="10dp"
-        android:background="@color/gray"/>
+        android:background="@color/gray"
+        android:paddingTop="10dp" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:id="@+id/lincontact"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingTop="50dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/lincontact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dp_30"
+            android:paddingVertical="@dimen/dp_50"
+            android:visibility="gone">
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_textbox"
                 android:hint="@string/your_full_name"
-                android:singleLine="true"
-                android:padding="15dp"
                 android:nextFocusDown="@+id/edt_mobile"
+                android:padding="15dp"
+                android:singleLine="true"
                 android:textColor="@color/textbox_hint"
                 android:textColorHint="@color/textbox_hint" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_textbox"
                 android:hint="@string/mobile_no"
                 android:inputType="number"
+                android:nextFocusDown="@+id/edt_inquiry"
                 android:padding="15dp"
                 android:singleLine="true"
-                android:nextFocusDown="@+id/edt_inquiry"
-                android:layout_marginTop="15dp"
                 android:textColor="@color/textbox_hint"
-                android:textColorHint="@color/textbox_hint"/>
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edt_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_textbox"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:padding="15dp"
-            android:singleLine="true"
-            android:nextFocusDown="@+id/edt_inquiry"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/textbox_hint"
-            android:textColorHint="@color/textbox_hint"/>
+                android:textColorHint="@color/textbox_hint" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_textbox"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:nextFocusDown="@+id/edt_inquiry"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="@color/textbox_hint"
+                android:textColorHint="@color/textbox_hint" />
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_inquiry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_textbox"
-                android:hint="@string/inquiry"
-                android:padding="15dp"
-                android:nextFocusDown="@+id/btn_submit"
                 android:layout_marginTop="15dp"
-                android:lines="5"
+                android:background="@drawable/rounded_textbox"
                 android:gravity="top"
+                android:hint="@string/inquiry"
+                android:lines="5"
+                android:nextFocusDown="@+id/btn_submit"
+                android:padding="15dp"
                 android:textColor="@color/textbox_hint"
-                android:textColorHint="@color/textbox_hint"/>
-            <Button
+                android:textColorHint="@color/textbox_hint" />
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
-                android:text="SUBMIT"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_50"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_25"
                 android:background="@drawable/submit_button2"
                 android:hint="@string/your_full_name"
-                android:textSize="@dimen/sp_20"
+                android:text="@string/submit"
+                android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp"/>
-    </LinearLayout>
+                android:textSize="@dimen/sp_20" />
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <LinearLayout
         android:id="@+id/lintnc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="20dp"
         android:paddingLeft="10dp"
+        android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:visibility="gone">
+
         <WebView
             android:id="@+id/webtnc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="klasdjaslkdjsalkdjaslkdasdlaskdjaslkdj"/>
+            android:text="klasdjaslkdjsalkdjaslkdasdlaskdjaslkdj" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linabout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="20dp"
         android:paddingLeft="10dp"
+        android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:visibility="visible">
+
         <WebView
             android:id="@+id/webabout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="klasdjaslkdjsalkdjaslkdasdlaskdjaslkdj"/>
+            android:text="klasdjaslkdjsalkdjaslkdasdlaskdjaslkdj" />
     </LinearLayout>
 </LinearLayout>

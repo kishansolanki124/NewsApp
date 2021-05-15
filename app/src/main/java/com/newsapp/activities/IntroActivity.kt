@@ -64,14 +64,14 @@ class IntroActivity : AppCompatActivity() {
             circularProgressDrawable.colorFilter = BlendModeColorFilter(
                 ContextCompat.getColor(
                     this,
-                    R.color.black
+                    R.color.pink
                 ), BlendMode.SRC_ATOP
             )
         } else {
             circularProgressDrawable.setColorFilter(
                 ContextCompat.getColor(
                     this,
-                    R.color.black
+                    R.color.pink
                 ), PorterDuff.Mode.SRC_ATOP
             )
         }

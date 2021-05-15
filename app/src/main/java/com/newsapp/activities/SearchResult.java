@@ -25,6 +25,7 @@ import com.newsapp.api.ApiListeners;
 import com.newsapp.constant.Constant;
 import com.newsapp.dto.PopupBannerResponse;
 import com.newsapp.model.News;
+import com.newsapp.model.NewsBanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SearchResult extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
 
     public ApiListeners apiListeners;
+    private int newsBannerAdCurrentIndex = 0;
+    private ArrayList<NewsBanner> newsBannerList;
     /*Start Load More*/
     public int page = 1;
     RecyclerView rec_for_you;
@@ -142,7 +145,27 @@ public class SearchResult extends AppCompatActivity implements ViewPagerEx.OnPag
                         total_page = response.body().getTotal_page();
                         page = Integer.parseInt(response.body().getCurrent_page());
                         page++;
+                        if (!response.body().getNews_banner().isEmpty()) {
+                            newsBannerList = new ArrayList<>();
+                            newsBannerList.addAll(response.body().getNews_banner());
+                        }
+
                         for (int i = 0; i < response.body().getData().size(); i++) {
+
+                            if (!newsBannerList.isEmpty()) {
+                                if (i == 1) {
+                                    if ((newsBannerList.size() - 1) < newsBannerAdCurrentIndex) {
+                                        newsBannerAdCurrentIndex = 0;
+                                    }
+                                    News.Data obj = new News.Data();
+                                    obj.setUp_pro_img(newsBannerList.get(newsBannerAdCurrentIndex).getUp_pro_img());
+                                    obj.setUrl(newsBannerList.get(newsBannerAdCurrentIndex).getUrl());
+                                    obj.setView_type(2);
+                                    list.add(obj);
+                                    newsBannerAdCurrentIndex += 1;
+                                }
+                            }
+
                             News.Data obj = new News.Data();
                             obj.setIsbookmark(response.body().getData().get(i).getIsbookmark());
                             obj.setAuthor(response.body().getData().get(i).getAuthor());

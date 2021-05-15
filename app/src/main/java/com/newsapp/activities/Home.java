@@ -2,7 +2,6 @@ package com.newsapp.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -40,13 +39,17 @@ import com.newsapp.constant.Constant;
 import com.newsapp.dto.PopupBannerResponse;
 import com.newsapp.model.City;
 import com.newsapp.model.News;
+import com.newsapp.model.NewsBanner;
 import com.newsapp.model.Settings;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -59,12 +62,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
     private final int STORAGE_PERMISSION_CODE = 1;
+    private ArrayList<NewsBanner> newsBannerList;
     public ApiListeners apiListeners;
     /*Start Load More*/
     public int page = 1;
     SliderView img_slider;
     RecyclerView rec_for_you;
-    SliderAdapter adapter;
+    SliderAdapter sliderAdapter;
     ProgressDialog pb;
     Spinner sp_city;
     ArrayAdapter<String> ardb_city;
@@ -76,8 +80,9 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     ImageView img_spinner_city, img_slider_next, img_slider_perv;
     private Handler handler = null;
     private Runnable runnableCode = null;
-    private ArrayList<News.Data> list_regular, list1_tranding, list2_slider;
-    private SearchResultAdapter mAdapter;
+    private ArrayList<News.Data> regularNewsList, trendingNewsList, list2_slider;
+    private int newsBannerAdCurrentIndex = 0;
+    private SearchResultAdapter newsListAdapter;
     private int total_page;
     private boolean isLoadMoreApiCall = true;
     private int mSelectedIndex = 0;
@@ -87,7 +92,7 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         Constant.setBottomMenuSelected(Home.this, 0);
         img_slider = findViewById(R.id.img_slider);
         rec_for_you = findViewById(R.id.rec_for_you);
@@ -99,8 +104,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         img_slider_perv = findViewById(R.id.img_slider_perv);
         ar_city_name = new ArrayList<>();
         ar_city_id = new ArrayList<>();
-        list_regular = new ArrayList<>();
-        list1_tranding = new ArrayList<>();
+        regularNewsList = new ArrayList<>();
+        trendingNewsList = new ArrayList<>();
         Init();
 
         getTranding();
@@ -111,7 +116,6 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 
         lin_spinner.setOnClickListener(view -> sp_city.performClick());
         img_spinner_city.setOnClickListener(view -> sp_city.performClick());
-
     }
 
     private void Init() {
@@ -132,6 +136,7 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 
         if (ContextCompat.checkSelfPermission(Home.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            System.out.println("permission granted");
 //            Toast.makeText(Signup.this, "You have already granted this permission!",
 //                    Toast.LENGTH_SHORT).show();
         } else {
@@ -169,7 +174,7 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                             }
 
                             @Override
-                            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                            public View getDropDownView(int position, View convertView, @NotNull ViewGroup parent) {
                                 // Cast the drop down items (popup items) as text view
                                 TextView tv = (TextView) super.getDropDownView(position, convertView, parent);
 
@@ -197,8 +202,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                                 mSelectedIndex = i;
                                 sel_city_id = ar_city_id.get(i);
                                 if (!firsttime) {
-                                    list_regular.clear();
-                                    list1_tranding.clear();
+                                    regularNewsList.clear();
+                                    trendingNewsList.clear();
                                     page = 1;
                                     firsttime = false;
                                 }
@@ -292,16 +297,36 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
-//                        list_regular.clear();
                         total_page = response.body().getTotal_page();
                         page = Integer.parseInt(response.body().getCurrent_page());
                         page++;
+
+                        if (!response.body().getNews_banner().isEmpty()) {
+                            newsBannerList = new ArrayList<>();
+                            newsBannerList.addAll(response.body().getNews_banner());
+                        }
+
                         for (int i = 0; i < response.body().getData().size(); i++) {
                             if (i == 2 && page == 2) {
                                 News.Data obj = new News.Data();
                                 obj.setView_type(1);
-                                list_regular.add(obj);
+                                regularNewsList.add(obj);
                             }
+
+                            if (!newsBannerList.isEmpty()) {
+                                if (i == 1) {
+                                    if ((newsBannerList.size() - 1) < newsBannerAdCurrentIndex) {
+                                        newsBannerAdCurrentIndex = 0;
+                                    }
+                                    News.Data obj = new News.Data();
+                                    obj.setUp_pro_img(newsBannerList.get(newsBannerAdCurrentIndex).getUp_pro_img());
+                                    obj.setUrl(newsBannerList.get(newsBannerAdCurrentIndex).getUrl());
+                                    obj.setView_type(2);
+                                    regularNewsList.add(obj);
+                                    newsBannerAdCurrentIndex += 1;
+                                }
+                            }
+
                             News.Data obj = new News.Data();
                             obj.setIsbookmark(response.body().getData().get(i).getIsbookmark());
                             obj.setAuthor(response.body().getData().get(i).getAuthor());
@@ -320,24 +345,23 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                             obj.setUser_mobile(response.body().getData().get(i).getUser_mobile());
                             obj.setAuthor_img(response.body().getData().get(i).getAuthor_img());
 
-                            list_regular.add(obj);
+                            regularNewsList.add(obj);
 
-                            // Result
                             if (page == 2) {
-                                mAdapter = new SearchResultAdapter(list_regular, list1_tranding, Home.this);
+                                newsListAdapter = new SearchResultAdapter(regularNewsList, trendingNewsList, Home.this);
                                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                                 rec_for_you.setLayoutManager(mLayoutManager);
                                 rec_for_you.setItemAnimator(new DefaultItemAnimator());
-                                rec_for_you.setAdapter(mAdapter);
+                                rec_for_you.setAdapter(newsListAdapter);
                             } else {
-                                if (mAdapter != null) {
+                                if (newsListAdapter != null) {
                                     isLoadMoreApiCall = true;
-                                    mAdapter.notifyDataSetChanged();
+                                    newsListAdapter.notifyDataSetChanged();
                                 }
                             }
                             rec_for_you.addOnScrollListener(new RecyclerView.OnScrollListener() {
                                 @Override
-                                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                                public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState) {
                                     super.onScrollStateChanged(recyclerView, newState);
                                     if (total_page >= page) {
                                         if (isLoadMoreApiCall) {
@@ -349,12 +373,12 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                                 }
                             });
                         }
-                        if (list_regular.size() == 0) {
-                            txt_norecfound.setText("No Record Found.!");
+                        if (regularNewsList.size() == 0) {
+                            txt_norecfound.setText(getString(R.string.no_record_found));
                             txt_norecfound.setVisibility(View.VISIBLE);
                             rec_for_you.setVisibility(View.GONE);
                         } else {
-                            txt_norecfound.setText("Loading...");
+                            txt_norecfound.setText(getString(R.string.loading));
                             txt_norecfound.setVisibility(View.GONE);
                             rec_for_you.setVisibility(View.VISIBLE);
                         }
@@ -385,12 +409,11 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 //                pb.dismiss();
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
-
-                        list1_tranding = new ArrayList<>();
+                        trendingNewsList = new ArrayList<>();
                         for (int i = 0; i < response.body().getData().size(); i++) {
                             News.Data data = response.body().getData().get(i);
                             data.setnumRecords((i + 1) + "/" + response.body().getData().size());
-                            list1_tranding.add(data);
+                            trendingNewsList.add(data);
                         }
                     } else {
                         Toast.makeText(Home.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
@@ -421,8 +444,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                     if (response.body().getSuccess()) {
                         list2_slider = (ArrayList<News.Data>) response.body().getData();
                         // passing this array list inside our adapter class.
-                        adapter = new SliderAdapter(Home.this, list2_slider);
-                        img_slider.setSliderAdapter(adapter);
+                        sliderAdapter = new SliderAdapter(Home.this, list2_slider);
+                        img_slider.setSliderAdapter(sliderAdapter);
                         img_slider.setInfiniteAdapterEnabled(true);
                         img_slider.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
                         img_slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -533,19 +556,9 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed because of this and that")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(Home.this,
-                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setPositiveButton("ok", (dialog, which) -> ActivityCompat.requestPermissions(Home.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE))
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
         } else {
             ActivityCompat.requestPermissions(this,

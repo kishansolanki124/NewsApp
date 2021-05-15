@@ -1,106 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:scaleType="fitXY"
-        android:background="@color/gray_border" />
+        android:background="@color/gray_border"
+        android:scaleType="fitXY" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <LinearLayout
             android:id="@+id/lin_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            android:gravity="center">
+            android:padding="@dimen/dp_10">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_home"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:src="@drawable/menu_icon_home_active"/>
+                android:src="@drawable/menu_icon_home_active" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Home"
-                android:textColor="@color/dark_blue"
-                android:textSize="14dp"
-                android:layout_marginTop="5dp"/>
+                android:textColor="@color/pink"
+                android:textSize="14dp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            android:gravity="center">
+            android:padding="@dimen/dp_10">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_search"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:src="@drawable/menu_icon_search"/>
+                android:src="@drawable/menu_icon_search" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Search"
-                android:textSize="14dp"
                 android:textColor="@color/footer_unselect_text"
-                android:layout_marginTop="5dp"/>
+                android:textSize="14dp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_upload"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            android:gravity="center">
+            android:padding="@dimen/dp_10">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_upload"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:src="@drawable/menu_icon_upload"/>
+                android:src="@drawable/menu_icon_upload" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Upload"
-                android:textSize="14dp"
                 android:textColor="@color/footer_unselect_text"
-                android:layout_marginTop="5dp"/>
+                android:textSize="14dp" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lin_profile"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10"
-            android:gravity="center">
+            android:padding="@dimen/dp_10">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_profile"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:src="@drawable/menu_icon_user"/>
+                android:src="@drawable/menu_icon_user" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="Profile"
-                android:textSize="14dp"
                 android:textColor="@color/footer_unselect_text"
-                android:layout_marginTop="5dp"/>
+                android:textSize="14dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

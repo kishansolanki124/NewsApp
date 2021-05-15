@@ -1,50 +1,53 @@
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="50dp"
     android:paddingLeft="30dp"
-    android:paddingRight="30dp" >
+    android:paddingTop="50dp"
+    android:paddingRight="30dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edt_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_textbox"
-            android:textColorHint="@color/textbox_hint"
-            android:textColor="@color/textbox_hint"
             android:hint="@string/enter_otp"
+            android:maxLines="1"
             android:padding="15dp"
-            android:maxLines="1"/>
+            android:textColor="@color/textbox_hint"
+            android:textColorHint="@color/textbox_hint" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:text="SUBMIT"
-            android:textSize="@dimen/sp_20"
+            android:layout_width="@dimen/dp_200"
+            android:layout_height="@dimen/dp_50"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_25"
             android:background="@drawable/submit_button2"
             android:hint="@string/your_full_name"
+            android:text="@string/submit"
+            android:textAllCaps="true"
             android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"/>
+            android:textSize="@dimen/sp_20" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_logo"
             android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_200"
-            android:src="@mipmap/screen_icon_logo"
-            />
+            android:src="@mipmap/screen_icon_logo" />
     </LinearLayout>
 </LinearLayout>

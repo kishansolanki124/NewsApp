@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Build

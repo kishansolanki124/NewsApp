@@ -62,14 +62,14 @@
                 android:textColor="@color/textbox_hint"
                 android:textColorHint="@color/textbox_hint" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_50"
                 android:layout_below="@+id/edt_city"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="@dimen/dp_25"
                 android:background="@drawable/submit_button2"
                 android:hint="@string/your_full_name"
                 android:text="@string/submit"
