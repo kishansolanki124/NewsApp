@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:background="@color/background_gray"
         android:paddingBottom="20dp">
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imglogo"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -16,15 +16,15 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             />
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgback"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:padding="3dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/ic_baseline_keyboard_backspace_24"
             />
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtabout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txttnc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtcontact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

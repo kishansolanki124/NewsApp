@@ -22,12 +22,12 @@
             android:orientation="vertical"
             android:padding="10dp"
             android:gravity="center">
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_home"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:src="@drawable/menu_icon_home_active"/>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -44,12 +44,12 @@
             android:orientation="vertical"
             android:padding="10dp"
             android:gravity="center">
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_search"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:src="@drawable/menu_icon_search"/>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,12 +66,12 @@
             android:orientation="vertical"
             android:padding="10dp"
             android:gravity="center">
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_upload"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:src="@drawable/menu_icon_upload"/>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,12 +88,12 @@
             android:orientation="vertical"
             android:padding="10dp"
             android:gravity="center">
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_profile"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:src="@drawable/menu_icon_user"/>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

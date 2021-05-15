@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"
             android:background="@color/background_gray"/>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Trading Story"

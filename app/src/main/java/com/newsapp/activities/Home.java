@@ -286,7 +286,10 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         getUserInfoVoCall.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-                pb.dismiss();
+                if (!isDestroyed() && (!(Home.this).isFinishing())) {
+                    pb.dismiss();
+                }
+
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
 //                        list_regular.clear();

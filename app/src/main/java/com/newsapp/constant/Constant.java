@@ -70,6 +70,7 @@ public class Constant {
     public static final String WS_CATEGORIES = BASE_URL + "getcategories.php";
     public static final String WS_Keyword = BASE_URL + "getkeyword.php";
     public static final String WS_NEWS_GALLRY = BASE_URL + "getnewsgallery.php";
+    public static final String WS_NEWS_DETAIL = BASE_URL + "getnews_detail";
     public static final String WS_POPUP_BANNER = BASE_URL + "getpopup_banner";
     public static final String WS_STATIC_PAGE = BASE_URL + "getstaticpage.php";
     public static final String WS_FEEDBACK = BASE_URL + "feedback.php";
@@ -81,6 +82,7 @@ public class Constant {
     public static final String WS_HOME_BANNER = BASE_URL + "gethome_banner.php";
     public static final boolean SettingAPI_CALLED = false;
     public static int ShareDescWords = 50;
+    public static final String NEWS_ID = "id";
 
     //********** SP ***************************
     public static String Android_version = "Android_version";

@@ -1,15 +1,22 @@
 package com.newsapp
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.net.Uri
+import android.os.Build
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.newsapp.constant.Constant
 import com.newsapp.dto.PopupBannerResponse
 import com.squareup.picasso.Picasso
@@ -22,14 +29,21 @@ private var pgDialog: Dialog? = null
 
 fun showProgressDialog(context: Context, popup_banner: List<PopupBannerResponse.PopupBanner>) {
     if (pgDialog == null) {
-        pgDialog = getProgressDialog(context, popup_banner)
-        pgDialog?.show()
+        if (!(context as Activity).isFinishing) {
+            pgDialog = getProgressDialog(context, popup_banner)
+            pgDialog?.show()
+        }
     } else if (null != pgDialog && (!pgDialog!!.isShowing)) {
-        pgDialog?.show()
+        if (!(context as Activity).isFinishing) {
+            pgDialog?.show()
+        }
     }
 }
 
-fun getProgressDialog(context: Context, popup_banner: List<PopupBannerResponse.PopupBanner>): Dialog {
+fun getProgressDialog(
+    context: Context,
+    popup_banner: List<PopupBannerResponse.PopupBanner>
+): Dialog {
     val progressDialog = Dialog(context)
     val view: View = View.inflate(context, R.layout.dialog_progress, null)
     //LayoutInflater.from(context).inflate(R.layout.dialog_progress, parent, false)
@@ -46,11 +60,34 @@ fun getProgressDialog(context: Context, popup_banner: List<PopupBannerResponse.P
         dismissProgressDialog()
     }
 
+    val circularProgressDrawable = CircularProgressDrawable(context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+
+    circularProgressDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        circularProgressDrawable.colorFilter = BlendModeColorFilter(
+            ContextCompat.getColor(
+                context,
+                R.color.white
+            ), BlendMode.SRC_ATOP
+        )
+    } else {
+        circularProgressDrawable.setColorFilter(
+            ContextCompat.getColor(
+                context,
+                R.color.white
+            ), PorterDuff.Mode.SRC_ATOP
+        )
+    }
+
+    circularProgressDrawable.start()
+
     Picasso.with(ivAppBanner.context)
-            .load(Constant.BANNER + popup_banner[0].up_pro_img)
-            .error(R.drawable.error_load)
-            .placeholder(R.drawable.loading)
-            .into(ivAppBanner)
+        .load(Constant.BANNER + popup_banner[0].up_pro_img)
+        .error(R.drawable.error_load)
+        .placeholder(circularProgressDrawable)
+        .into(ivAppBanner)
 
     progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     progressDialog.setContentView(view)
@@ -59,14 +96,14 @@ fun getProgressDialog(context: Context, popup_banner: List<PopupBannerResponse.P
     val window = progressDialog.window
     if (window != null) {
         window.setBackgroundDrawable(
-                ContextCompat.getDrawable(
-                        context,
-                        android.R.color.transparent
-                )
+            ContextCompat.getDrawable(
+                context,
+                android.R.color.transparent
+            )
         )
         window.setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
         )
     }
     return progressDialog

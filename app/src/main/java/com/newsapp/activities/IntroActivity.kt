@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -15,6 +16,7 @@ import com.newsapp.constant.Constant
 import com.newsapp.dto.IntroResponseModel
 import kotlinx.android.synthetic.main.activity_intro.*
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +27,7 @@ import java.util.concurrent.TimeUnit
 
 class IntroActivity : AppCompatActivity() {
 
-    var apiListeners: ApiListeners? = null
+    private lateinit var apiListeners: ApiListeners
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,34 +47,42 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun fetchIntroImages() {
-        //pb.show();
+        pbIntro.visibility = View.VISIBLE
         val client = OkHttpClient.Builder()
-                .connectTimeout(100, TimeUnit.SECONDS)
-                .readTimeout(100, TimeUnit.SECONDS).build()
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .readTimeout(100, TimeUnit.SECONDS).build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL).client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(Constant.BASE_URL).client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
         apiListeners = retrofit.create(ApiListeners::class.java)
 
-        val getUserInfoVoCall: Call<IntroResponseModel> = apiListeners!!.introBanner()
+        val getUserInfoVoCall: Call<IntroResponseModel> = apiListeners.introBanner()
 
         getUserInfoVoCall.enqueue(object : Callback<IntroResponseModel?> {
-            override fun onResponse(call: Call<IntroResponseModel?>, response: Response<IntroResponseModel?>) {
-//                pb.dismiss();
+            override fun onResponse(
+                call: Call<IntroResponseModel?>,
+                response: Response<IntroResponseModel?>
+            ) {
+                pbIntro.visibility = View.GONE
                 if (response.body() != null) {
                     if (response.body()!!.success) {
                         setupOffersViewPager(response.body()!!.home_banner)
                     } else {
-                        Toast.makeText(this@IntroActivity, response.body()!!.msg, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@IntroActivity,
+                            response.body()!!.msg,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
 
             override fun onFailure(call: Call<IntroResponseModel?>, t: Throwable) {
-//                pb.dismiss();
+                pbIntro.visibility = View.GONE
                 Toast.makeText(this@IntroActivity, t.message, Toast.LENGTH_SHORT).show()
             }
         })
@@ -100,7 +110,7 @@ class IntroActivity : AppCompatActivity() {
             override fun run() {
                 handler.post(update)
             }
-        }, 1000, 2000)
+        }, 2000, 3500)
 
         introViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

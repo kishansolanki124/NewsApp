@@ -18,7 +18,7 @@
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/img_slider"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/dp_250"
                     app:sliderAnimationDuration="600"
                     app:sliderAutoCycleDirection="back_and_forth"
                     app:sliderAutoCycleEnabled="true"
@@ -41,7 +41,7 @@
                     android:background="@drawable/spinner"
                     android:gravity="right"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginStart="10dp">
                     <Spinner
                         android:id="@+id/sp_city"
                         android:layout_width="80dp"
@@ -50,23 +50,23 @@
                         android:gravity="center"
                         android:background="@android:color/transparent"
                         />
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_spinner_city"
                         android:layout_height="40dp"
                         android:layout_width="20dp"
                         android:src="@drawable/screen1_icon_down"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginEnd="10dp"/>
                 </LinearLayout>
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_slider_next"
                     android:layout_height="50dp"
                     android:layout_width="50dp"
                     android:padding="10dp"
                     android:visibility="gone"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/next"/>
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_slider_perv"
                     android:layout_height="50dp"
                     android:layout_width="50dp"
@@ -82,15 +82,15 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="15dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_above="@+id/txttitle"/>
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txttitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/sp_22"
                     android:textColor="@color/white"
                     android:layout_alignParentBottom="true"
                     android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/-->
@@ -106,12 +106,12 @@
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:layout_weight="1">
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textStyle="bold"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:textColor="@color/color_title_desc"
                     android:textSize="15dp"
                     android:text="For You"/>
@@ -119,7 +119,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/background_gray"/>
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_norecfound"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

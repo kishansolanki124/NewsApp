@@ -1,29 +1,30 @@
 package com.newsapp.activities;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.newsapp.AppUtilsKt;
 import com.newsapp.R;
 import com.newsapp.adpter.OtherStoryAdapter;
 import com.newsapp.adpter.SimpleSliderAdapter;
 import com.newsapp.api.ApiListeners;
 import com.newsapp.constant.Constant;
+import com.newsapp.dto.NewsDetailResponse;
 import com.newsapp.dto.PopupBannerResponse;
 import com.newsapp.model.News;
 import com.newsapp.model.NewsGallery;
@@ -43,17 +44,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
-
+public class NewsDetail extends AppCompatActivity {
     public ApiListeners apiListeners;
-    RecyclerView rec_otherstory;
+    RecyclerView rvOtherStories;
     List<News.Data> list;
     SliderView img_slider;
     TextView txt_tag, txt_title, txt_name, txt_desc, txt_date;
-    ImageView img_profile, img_share, img_back, imgbookmark;
-    ProgressDialog pb;
-    News.Data newsData;
+    LinearLayout llNewsDetailContent;
+    NestedScrollView nsvRoot;
+    ProgressBar pbNewsDetail;
+    ImageView img_profile, img_share, img_back, ivBookmark;
     ArrayList<String> ar_sliders;
+    private int newsId = 0;
+    private String newsCatId = "";
     private Handler handler = null;
     private Runnable runnableCode = null;
     private OtherStoryAdapter mAdapter;
@@ -63,15 +66,19 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_screen);
+
         Objects.requireNonNull(getSupportActionBar()).hide();
-        Constant.setBottomMenuSelected(DetailScreen.this, 0);
+
+        Constant.setBottomMenuSelected(NewsDetail.this, 0);
         if (Constant.get_sp(getApplicationContext(), "mobile").isEmpty()) {
             finish();
         }
+
+        init();
+
         ar_sliders = new ArrayList<>();
-        rec_otherstory = findViewById(R.id.rec_otherstory);
+        rvOtherStories = findViewById(R.id.rec_otherstory);
         img_slider = findViewById(R.id.img_slider);
-        Init();
         txt_tag = findViewById(R.id.txt_tag);
         txt_title = findViewById(R.id.txt_title);
         txt_name = findViewById(R.id.txt_name);
@@ -79,58 +86,24 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         img_share = findViewById(R.id.img_share);
         img_profile = findViewById(R.id.img_profile);
         img_back = findViewById(R.id.img_back);
-        imgbookmark = findViewById(R.id.imgbookmark);
+        ivBookmark = findViewById(R.id.imgbookmark);
         txt_date = findViewById(R.id.txt_date);
 
-        newsData = (News.Data) getIntent().getSerializableExtra("newsDetails");
+        llNewsDetailContent = findViewById(R.id.llNewsDetailContent);
+        nsvRoot = findViewById(R.id.nsvRoot);
+        pbNewsDetail = findViewById(R.id.pbNewsDetail);
 
-        txt_tag.setText(newsData.getKeywords().toUpperCase());
-        txt_title.setText(newsData.getName().trim());
-        txt_name.setText(newsData.getUpload_by());
-        txt_date.setText(newsData.getPdate());
-        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
-        txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
-        if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
-            imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
-        } else {
-            imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_24);
+        newsId = getIntent().getIntExtra(Constant.NEWS_ID, 0);
+
+        if (0 != newsId) {
+            llNewsDetailContent.setVisibility(View.INVISIBLE);
+            pbNewsDetail.setVisibility(View.VISIBLE);
+            getNewsDetails();
         }
-        Picasso.with(DetailScreen.this)
-                .load(Constant.AUTHER + newsData.getAuthor_img())
-                .error(R.drawable.user_icon)
-                .placeholder(R.drawable.user_icon)
-                .into(img_profile);
-//        Picasso.with(getApplicationContext())
-//                .load(Constant.AUTHER+data.getAuthor_img())
-//                .error(R.drawable.error_load)
-//                .placeholder(R.drawable.loading)
-//                .into(img_profile);
-        txt_tag.setOnClickListener(view -> Search.gotoSearchPage(DetailScreen.this, "", newsData.getCid(),
-                "", "", "", newsData.getKeywords()));
-        img_share.setOnClickListener(view -> {
-            String shareBody = Constant.get_sp(getApplicationContext(), Constant.Postsharemsg) + "\n\n"
-                    + HtmlCompat.fromHtml(newsData.getDescription().substring(0, Math.min(newsData.getDescription().length(), Constant.ShareDescWords)),
-                    HtmlCompat.FROM_HTML_MODE_COMPACT);
-            Constant.shareImage(getApplicationContext(), shareBody, Constant.POST + newsData.getUp_pro_img(), null);
-        });
-        img_back.setOnClickListener(view -> finish());
-        imgbookmark.setOnClickListener(view -> {
-            Constant.saveBookmark(DetailScreen.this, newsData.getId(), Constant.get_sp(getApplicationContext(), "mobile"), "");
-            if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
-                imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_24);
-                newsData.setIsbookmark("1");
-            } else {
-                imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
-                newsData.setIsbookmark("0");
-            }
-        });
-
-        getOtherStories();
-        getSliders();
         getPopupBanner();
     }
 
-    private void Init() {
+    private void init() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.SECONDS)
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -140,57 +113,49 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiListeners = retrofit.create(ApiListeners.class);
-        pb = new ProgressDialog(DetailScreen.this);
-        pb.setMessage("Please Wait...!");
-        pb.setCancelable(false);
     }
 
     public void getOtherStories() {
-        pb.show();
-        final Call<News> getUserInfoVoCall = apiListeners.OtherStories("", newsData.getCid(), "", "", "", Constant.get_sp(DetailScreen.this, "mobile"));
+        final Call<News> getUserInfoVoCall = apiListeners.OtherStories("", newsCatId, "", "", "", Constant.get_sp(NewsDetail.this, "mobile"));
 
         getUserInfoVoCall.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-                pb.dismiss();
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
                         list = (ArrayList<News.Data>) response.body().getData();
                         // Other Stories
-                        mAdapter = new OtherStoryAdapter(list, DetailScreen.this);
+                        mAdapter = new OtherStoryAdapter(list, NewsDetail.this);
                         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                        rec_otherstory.setLayoutManager(mLayoutManager);
-                        rec_otherstory.setItemAnimator(new DefaultItemAnimator());
-                        rec_otherstory.setAdapter(mAdapter);
+                        rvOtherStories.setLayoutManager(mLayoutManager);
+                        rvOtherStories.setItemAnimator(new DefaultItemAnimator());
+                        rvOtherStories.setAdapter(mAdapter);
                     } else {
-                        Toast.makeText(DetailScreen.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewsDetail.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
+                nsvRoot.scrollTo(0, 0);
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                pb.dismiss();
-                Toast.makeText(DetailScreen.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewsDetail.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void getSliders() {
-        pb.show();
-        final Call<NewsGallery> getUserInfoVoCall = apiListeners.NewsGallery(newsData.getId());
+        final Call<NewsGallery> getUserInfoVoCall = apiListeners.NewsGallery(String.valueOf(newsId));
 
         getUserInfoVoCall.enqueue(new Callback<NewsGallery>() {
             @Override
             public void onResponse(Call<NewsGallery> call, Response<NewsGallery> response) {
-                pb.dismiss();
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
-                        ar_sliders.add(newsData.getUp_pro_img());
                         for (int i = 0; i < response.body().getData().size(); i++) {
                             ar_sliders.add(response.body().getData().get(i).getUp_pro_img());
                         }
-                        adapter = new SimpleSliderAdapter(DetailScreen.this, ar_sliders);
+                        adapter = new SimpleSliderAdapter(NewsDetail.this, ar_sliders);
                         img_slider.setAutoCycleDirection(SliderView.LAYOUT_DIRECTION_LTR);
                         img_slider.setSliderAdapter(adapter);
                         img_slider.setScrollTimeInSec(5);
@@ -234,37 +199,90 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
 //                            img_slider.setVisibility(View.GONE);
 //                        }
                     } else {
-                        Toast.makeText(DetailScreen.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewsDetail.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
+                nsvRoot.scrollTo(0, 0);
             }
 
             @Override
             public void onFailure(Call<NewsGallery> call, Throwable t) {
-                pb.dismiss();
-                Toast.makeText(DetailScreen.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewsDetail.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void getNewsDetails() {
+        final Call<NewsDetailResponse> getUserInfoVoCall = apiListeners.newsDetail(String.valueOf(newsId),
+                Constant.get_sp(NewsDetail.this, "mobile"));
+        getUserInfoVoCall.enqueue(new Callback<NewsDetailResponse>() {
+            @Override
+            public void onResponse(Call<NewsDetailResponse> call, Response<NewsDetailResponse> response) {
+                nsvRoot.scrollTo(0, 0);
+                pbNewsDetail.setVisibility(View.GONE);
+                llNewsDetailContent.setVisibility(View.VISIBLE);
+                nsvRoot.scrollTo(0, 0);
+                if (response.body() != null) {
+                    if (response.body().getSuccess()) {
+                        setupViews(response.body().getData().get(0));
+                    } else {
+                        Toast.makeText(NewsDetail.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                nsvRoot.scrollTo(0, 0);
+            }
 
+            @Override
+            public void onFailure(Call<NewsDetailResponse> call, Throwable t) {
+                pbNewsDetail.setVisibility(View.GONE);
+                llNewsDetailContent.setVisibility(View.VISIBLE);
+                Toast.makeText(NewsDetail.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    @Override
-    public void onPageSelected(int position) {
+    private void setupViews(NewsDetailResponse.Data newsData) {
+        txt_tag.setText(newsData.getKeywords().toUpperCase());
+        txt_title.setText(newsData.getName().trim());
+        txt_name.setText(newsData.getUpload_by());
+        txt_date.setText(newsData.getPdate());
+        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
+        txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
+        if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
+            ivBookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
+        } else {
+            ivBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24);
+        }
+        Picasso.with(NewsDetail.this)
+                .load(Constant.AUTHER + newsData.getAuthor_img())
+                .error(R.drawable.user_icon)
+                .placeholder(R.drawable.user_icon)
+                .into(img_profile);
 
-    }
+        txt_tag.setOnClickListener(view -> Search.gotoSearchPage(NewsDetail.this, "", newsData.getCid(),
+                "", "", "", newsData.getKeywords()));
+        img_share.setOnClickListener(view -> {
+            String shareBody = Constant.get_sp(getApplicationContext(), Constant.Postsharemsg) + "\n\n"
+                    + HtmlCompat.fromHtml(newsData.getDescription().substring(0, Math.min(newsData.getDescription().length(), Constant.ShareDescWords)),
+                    HtmlCompat.FROM_HTML_MODE_COMPACT);
+            Constant.shareImage(getApplicationContext(), shareBody, Constant.POST + newsData.getUp_pro_img(), null);
+        });
+        img_back.setOnClickListener(view -> finish());
+        ivBookmark.setOnClickListener(view -> {
+            Constant.saveBookmark(NewsDetail.this, newsData.getId(), Constant.get_sp(getApplicationContext(), "mobile"), "");
+            if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
+                ivBookmark.setImageResource(R.drawable.ic_baseline_bookmark_24);
+                newsData.setIsbookmark("1");
+            } else {
+                ivBookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
+                newsData.setIsbookmark("0");
+            }
+        });
 
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-
+        newsCatId = newsData.getCid();
+        ar_sliders.add(newsData.getUp_pro_img());
+        getOtherStories();
+        getSliders();
     }
 
     @Override
@@ -289,6 +307,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                         System.out.println(response.body().getMsg());
                     }
                 }
+                nsvRoot.scrollTo(0, 0);
             }
 
             @Override
@@ -303,16 +322,16 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         runnableCode = new Runnable() {
             @Override
             public void run() {
-                if (!isDestroyed() && (!(DetailScreen.this).isFinishing())) {
-                    if ((DetailScreen.this).getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
-                        AppUtilsKt.showProgressDialog(DetailScreen.this, popup_banner);
+                if (!isDestroyed() && (!(NewsDetail.this).isFinishing())) {
+                    if ((NewsDetail.this).getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+                        AppUtilsKt.showProgressDialog(NewsDetail.this, popup_banner);
                     }
                     handler.postDelayed(this, Constant.AppFullScreenBannerAd.adBetweenTime);
                 }
             }
         };
 
-        if (!isDestroyed() && (!(DetailScreen.this).isFinishing())) {
+        if (!isDestroyed() && (!(NewsDetail.this).isFinishing())) {
             handler.postDelayed(runnableCode, Constant.AppFullScreenBannerAd.adDelayTime);
         }
     }

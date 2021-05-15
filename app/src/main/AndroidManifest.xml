@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.IntroActivity"
+        <activity
+            android:name=".activities.IntroActivity"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,6 +54,7 @@
         <activity
             android:name=".activities.DetailScreen"
             android:launchMode="standard"></activity>
+        <activity android:name=".activities.NewsDetail" />
         <activity
             android:name=".activities.Profile"
             android:launchMode="standard"></activity>
@@ -72,11 +74,11 @@
         <activity
             android:name=".activities.Signup"
             android:launchMode="standard">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".activities.Home"

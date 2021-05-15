@@ -76,7 +76,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_below="@+id/btn_submit">
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_logo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -84,7 +84,7 @@
                     android:src="@mipmap/screen_icon_logo"
                     />
             </LinearLayout>
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textbox_hint"

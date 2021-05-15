@@ -2,6 +2,7 @@ package com.newsapp.api;
 
 import com.newsapp.constant.Constant;
 import com.newsapp.dto.IntroResponseModel;
+import com.newsapp.dto.NewsDetailResponse;
 import com.newsapp.dto.PopupBannerResponse;
 import com.newsapp.model.BookmarkSave;
 import com.newsapp.model.Bookmarks;
@@ -84,6 +85,11 @@ public interface ApiListeners {
     @POST(Constant.WS_NEWS_GALLRY)
     @FormUrlEncoded
     Call<NewsGallery> NewsGallery(@Field("nid") String nid);
+
+    @POST(Constant.WS_NEWS_DETAIL)
+    @FormUrlEncoded
+    Call<NewsDetailResponse> newsDetail(@Field("nid") String nid,
+                                        @Field("user_mobile") String user_mobile);
 
     @POST(Constant.WS_POPUP_BANNER)
     @FormUrlEncoded

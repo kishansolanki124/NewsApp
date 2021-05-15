@@ -49,6 +49,7 @@
     <dimen name="sp_16">14sp</dimen>
     <dimen name="sp_18">16sp</dimen>
     <dimen name="sp_20">18sp</dimen>
+    <dimen name="sp_22">20sp</dimen>
     <dimen name="sp_24">22sp</dimen>
     <dimen name="sp_30">24sp</dimen>
     <dimen name="sp_40">36sp</dimen>

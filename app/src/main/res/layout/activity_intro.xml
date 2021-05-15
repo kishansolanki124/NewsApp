@@ -30,27 +30,37 @@
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@android:color/transparent"
             app:tabTextColor="@android:color/transparent" />
+
+        <ProgressBar
+            android:id="@+id/pbIntro"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dp_10"
+            android:indeterminateTint="@color/dark_blue"
+            android:indeterminateTintMode="multiply" />
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivAppLogo"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_200"
+        android:layout_height="@dimen/dp_160"
         android:layout_above="@id/btGetStarted"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/screen_icon_logo" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btGetStarted"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_40"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_20"
         android:background="@drawable/submit_button"
         android:text="@string/Get_Started"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_16" />
+        android:textSize="@dimen/sp_18" />
 </RelativeLayout>

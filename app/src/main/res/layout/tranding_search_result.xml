@@ -7,7 +7,7 @@
     android:id="@+id/lin_view"
     android:background="@color/white"
     android:paddingBottom="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginEnd="10dp">
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="200dp"
@@ -27,7 +27,7 @@
             app:riv_mutate_background="true"
             app:riv_tile_mode="clamp"
             app:riv_oval="false"/>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,14 +41,14 @@
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
             android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_numnews"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="1/5"
-            android:textSize="13dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+            android:textSize="@dimen/sp_14"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:gravity="center"
