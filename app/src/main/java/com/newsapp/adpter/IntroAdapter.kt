@@ -11,7 +11,7 @@ import com.newsapp.dto.IntroResponseModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.intro_item.view.*
 
-class IntroAdapter : RecyclerView.Adapter<IntroAdapter.HomeOffersViewHolder>() {
+class IntroAdapter(private val itemClick: (IntroResponseModel.HomeBanner) -> Unit) : RecyclerView.Adapter<IntroAdapter.HomeOffersViewHolder>() {
 
     private var list: List<IntroResponseModel.HomeBanner> = listOf()
 
@@ -22,7 +22,7 @@ class IntroAdapter : RecyclerView.Adapter<IntroAdapter.HomeOffersViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: HomeOffersViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position],itemClick)
     }
 
     fun setItem(list: List<IntroResponseModel.HomeBanner>) {
@@ -41,11 +41,18 @@ class IntroAdapter : RecyclerView.Adapter<IntroAdapter.HomeOffersViewHolder>() {
                 )
         )
 
-        fun bind(introImageModel: IntroResponseModel.HomeBanner) {
+        fun bind(
+            introImageModel: IntroResponseModel.HomeBanner,
+            itemClick: (IntroResponseModel.HomeBanner) -> Unit
+        ) {
             val circularProgressDrawable = CircularProgressDrawable(itemView.introImage.context)
             circularProgressDrawable.strokeWidth = 5f
             circularProgressDrawable.centerRadius = 30f
             circularProgressDrawable.start()
+
+            itemView.setOnClickListener {
+                itemClick(introImageModel)
+            }
 
             Picasso.with(itemView.introImage.context)
                     .load(Constant.BANNER + introImageModel.up_pro_img)

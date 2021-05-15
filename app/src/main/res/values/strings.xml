@@ -17,4 +17,6 @@
     <string name="my_bookmark">My Bookmarks</string>
     <string name="service_key">507d694b-d3db-41d8-8c3a-955a3544abcc</string>
     <string name="Get_Started">Get Started</string>
+    <string name="submit">submit</string>
+    <string name="Tending_Story">Trending Story</string>
 </resources>

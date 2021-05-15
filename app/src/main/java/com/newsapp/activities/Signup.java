@@ -2,11 +2,9 @@ package com.newsapp.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +22,7 @@ import com.newsapp.constant.Constant;
 import com.newsapp.model.SaveUser;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -36,19 +35,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Signup extends AppCompatActivity {
 
+    private final int STORAGE_PERMISSION_CODE = 1;
     public ApiListeners apiListeners;
     Button btn_submitl;
     EditText edt_fullname, edt_mobile, edt_city;
     ImageView img_logo;
     ProgressDialog pb;
-    private final int STORAGE_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         btn_submitl = findViewById(R.id.btn_submit);
         edt_fullname = findViewById(R.id.edt_fullname);
         edt_mobile = findViewById(R.id.edt_mobile);
@@ -66,31 +64,28 @@ public class Signup extends AppCompatActivity {
             startActivity(intent);
         }
 
-        btn_submitl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean isValid = true;
-                String msg = "";
-                if (edt_fullname.getText().toString().isEmpty()) {
-                    isValid = true;
-                    msg = "Full name must  required.";
-                    return;
-                }
-                if (edt_mobile.getText().toString().isEmpty()) {
-                    isValid = true;
-                    msg = "Mobile number must  required.";
-                    return;
-                }
-                if (edt_city.getText().toString().isEmpty()) {
-                    isValid = true;
-                    msg = "City must  required.";
-                    return;
-                }
+        btn_submitl.setOnClickListener(view -> {
+            boolean isValid = true;
+            String msg = "";
+            if (edt_fullname.getText().toString().isEmpty()) {
+                isValid = true;
+                msg = "Full name must  required.";
+                return;
+            }
+            if (edt_mobile.getText().toString().isEmpty()) {
+                isValid = true;
+                msg = "Mobile number must  required.";
+                return;
+            }
+            if (edt_city.getText().toString().isEmpty()) {
+                isValid = true;
+                msg = "City must  required.";
+                return;
+            }
 
-                if (isValid) {
-                    saveUser();
+            if (isValid) {
+                saveUser();
 
-                }
             }
         });
     }
@@ -155,19 +150,9 @@ public class Signup extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("Permission needed")
                     .setMessage("This permission is needed because of this and that")
-                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(Signup.this,
-                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-                        }
-                    })
-                    .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
+                    .setPositiveButton("ok", (dialog, which) -> ActivityCompat.requestPermissions(Signup.this,
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE))
+                    .setNegativeButton("cancel", (dialog, which) -> dialog.dismiss())
                     .create().show();
         } else {
             ActivityCompat.requestPermissions(this,
@@ -179,6 +164,7 @@ public class Signup extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                System.out.println("permission granted");
             } else {
                 Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
             }

@@ -80,9 +80,9 @@
                             android:id="@+id/txt_tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="@dimen/dp_10"
                             android:background="@drawable/tag"
-                            android:padding="10dp"
+                            android:padding="@dimen/dp_10"
                             android:textSize="@dimen/sp_12"
                             tools:text="Fashion" />
 
@@ -91,7 +91,7 @@
                             android:id="@+id/txt_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="@dimen/dp_10"
                             android:lineSpacingMultiplier="1.1"
                             android:textColor="@color/color_title_desc"
                             android:textSize="@dimen/sp_18"
@@ -143,7 +143,7 @@
                             android:id="@+id/txt_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="10dp"
+                            android:layout_margin="@dimen/dp_10"
                             android:lineSpacingMultiplier="1.1"
                             android:textColor="@color/color_title_desc"
                             tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
@@ -157,7 +157,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_margin="10dp"
+                            android:layout_margin="@dimen/dp_10"
                             android:layout_weight="1"
                             android:orientation="vertical">
 

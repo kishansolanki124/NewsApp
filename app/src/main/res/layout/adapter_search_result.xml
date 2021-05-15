@@ -1,156 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_view"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/lin_view">
+    android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/lin_mainlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:background="@color/white">
+        android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/gray"/>
+                android:background="@color/gray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp">
-                <de.hdodenhof.circleimageview.CircleImageView
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/img_propic"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/profile_pic"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/white" />
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_marginStart="10dp"
                     android:gravity="center_vertical"
-                    android:layout_marginStart="10dp">
+                    android:orientation="vertical">
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_14"
                         android:textColor="@color/color_title_desc"
-                        android:text="Tara Sutariya"/>
+                        android:textSize="@dimen/sp_14"
+                        tools:text="Tara Sutariya" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_12"
                         android:textColor="@color/color_datetime"
-                        android:text="03-05-2021 10:21 AM"/>
+                        android:textSize="@dimen/sp_12"
+                        tools:text="03-05-2021 10:21 AM" />
                 </LinearLayout>
             </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textStyle="bold"
+                android:layout_margin="@dimen/dp_10"
                 android:lineSpacingMultiplier="1.1"
-                android:textSize="@dimen/sp_18"
-                android:justificationMode="inter_word"
                 android:textColor="@color/color_title_desc"
-                android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/>
-            <com.makeramen.roundedimageview.RoundedImageView
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
+
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/img_photo"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:src="@mipmap/ic_launcher"
+                android:layout_height="@dimen/dp_180"
+                android:layout_marginHorizontal="@dimen/dp_10"
                 android:background="@drawable/rounded_corner"
-                android:scaleType="fitXY"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:riv_corner_radius="8dip"
-                app:riv_border_width="1dip"
-                app:riv_border_color="#FFFFFF"
+                android:scaleType="centerCrop"
+                app:riv_border_color="@android:color/white"
+                app:riv_border_width="@dimen/dp_1"
+                app:riv_corner_radius="@dimen/dp_10"
                 app:riv_mutate_background="true"
+                app:riv_oval="false"
                 app:riv_tile_mode="clamp"
-                app:riv_oval="false"/>
+                tools:src="@drawable/profile_pic" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="@dimen/dp_10">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tag"
+                    android:padding="@dimen/dp_10"
                     android:textColor="@color/black"
-                    android:text="Fashion"
                     android:textSize="@dimen/sp_12"
-                    android:padding="10dp"/>
+                    tools:ignore="RelativeOverlap"
+                    tools:text="Fashion" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_share"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
                     android:layout_marginStart="10dp"
                     android:layout_toStartOf="@+id/img_bookmark"
-                    android:src="@drawable/ic_baseline_share_gray_24"
-                    />
+                    android:padding="2dp"
+                    android:src="@drawable/ic_baseline_share_gray_24" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_bookmark"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:padding="2dp"
-                    android:layout_marginStart="10dp"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_baseline_bookmark_gray_border_24"
-                    />
+                    android:layout_marginStart="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_baseline_bookmark_gray_border_24" />
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/background_gray"/>
+            android:background="@color/background_gray" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lin_trading_story"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:background="@color/white">
+        android:visibility="visible">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/background_gray"/>
+            android:background="@color/background_gray" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trending Story"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/Tending_Story"
             android:textColor="@color/textbox_hint"
-            android:layout_margin="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"/>
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_tranding"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginEnd="10dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="10dp"
-            android:background="@color/background_gray"/>
+            android:background="@color/background_gray" />
     </LinearLayout>
 </LinearLayout>

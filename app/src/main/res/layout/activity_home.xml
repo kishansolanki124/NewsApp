@@ -1,205 +1,231 @@
-<LinearLayout android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     android:paddingTop="10dp">
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcom Sanket Faldu"
+        android:layout_margin="@dimen/dp_10"
+        android:textColor="@color/pink"
         android:textSize="@dimen/sp_22"
-        android:textColor="@color/name_head"
-        android:layout_margin="10dp"/>
+        tools:text="Welcom Sanket Faldu" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="@color/gray"/>
+        android:background="@color/gray" />
+
     <LinearLayout
         android:id="@+id/lin_bookmark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="My Bookmarks"
-            android:textStyle="bold"
-            android:textSize="18dp"
             android:textColor="@color/profile_head"
             android:textColorHint="@color/profile_head"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Your Bookmarked Stories, Events etc..."
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14"
             android:textColor="@color/profile_small_text"
             android:textColorHint="@color/profile_small_text"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lin_appinfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="App Info"
-            android:textStyle="bold"
             android:textColor="@color/profile_head"
             android:textColorHint="@color/profile_head"
-            android:textSize="18dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="About,Terms &amp; Privacy, Contact"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14"
             android:textColor="@color/profile_small_text"
             android:textColorHint="@color/profile_small_text"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lin_rateourapp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Rate Our App"
-            android:textStyle="bold"
             android:textColor="@color/profile_head"
             android:textColorHint="@color/profile_head"
-            android:textSize="18dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Give us 5 star on the play store"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14"
             android:textColor="@color/profile_small_text"
             android:textColorHint="@color/profile_small_text"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lin_invitefriends"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Invite Friends"
-            android:textStyle="bold"
             android:textColor="@color/profile_head"
             android:textColorHint="@color/profile_head"
-            android:textSize="18dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Tell Your Friend to use This App"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14"
             android:textColor="@color/profile_small_text"
             android:textColorHint="@color/profile_small_text"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/lin_logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Logout"
             android:textColor="@color/profile_head"
             android:textColorHint="@color/profile_head"
-            android:textStyle="bold"
-            android:textSize="18dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"/>
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:text="Session End"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_14"
             android:textColor="@color/profile_small_text"
             android:textColorHint="@color/profile_small_text"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"/>
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center"
-        android:background="@color/background_gray">
+        android:background="@color/background_gray"
+        android:gravity="center">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/screen_icon_logo"
-            />
+            android:layout_width="@dimen/dp_250"
+            android:layout_height="@dimen/dp_200"
+            android:src="@mipmap/screen_icon_logo" />
     </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/textbox_hint"
-        android:background="@color/background_gray"
-        android:text="News App is the first sentence search engine that helps you to update with fresh stories from your city"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:padding="10dp"
-        android:gravity="center"/>
+        android:background="@color/background_gray"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="News App is the first sentence search engine that helps you to update with fresh stories from your city"
+        android:textColor="@color/textbox_hint"
+        android:visibility="gone" />
+
     <include layout="@layout/bottom_menu" />
 </LinearLayout>

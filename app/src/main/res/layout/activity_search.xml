@@ -21,13 +21,13 @@
             android:layout_height="15dp"
             android:src="@drawable/search"
             android:visibility="visible"/>
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/search_stories"
             android:layout_marginStart="5dp"
-            android:textSize="15dp"
+            android:textSize="@dimen/sp_16"
             android:gravity="center_vertical"
             android:inputType="text"
             android:singleLine="true"
@@ -58,7 +58,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
-                android:textSize="15dp"/>
+                android:textSize="@dimen/sp_16"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -93,7 +93,7 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
-                android:textSize="15dp"/>
+                android:textSize="@dimen/sp_16"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="@dimen/dp_10">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rec_popularkeyword"
                     android:layout_width="match_parent"

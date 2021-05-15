@@ -34,13 +34,13 @@
                 android:layout_height="15dp"
                 android:src="@drawable/search"
                 android:visibility="visible"/>
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edt_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/search_stories"
                 android:layout_marginStart="5dp"
-                android:textSize="15dp"
+                android:textSize="@dimen/sp_16"
                 android:gravity="center_vertical"
                 android:inputType="text"
                 android:singleLine="true"
@@ -55,14 +55,14 @@
             android:text="Fashion"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="@dimen/sp_16"
             android:layout_marginStart="10dp"
             android:layout_above="@+id/txttitle"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txttitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/dp_10"
             android:textStyle="bold"
             android:textSize="@dimen/sp_22"
             android:textColor="@color/white"
@@ -81,7 +81,7 @@
             android:id="@+id/txt_norecfound"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="18dp"
+            android:textSize="@dimen/sp_20"
             android:gravity="center"
             android:textColor="@color/textbox_hint"
             android:text="Loading..."
@@ -90,7 +90,7 @@
             android:id="@+id/search_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/dp_10"
             android:textStyle="bold"
             android:textSize="@dimen/sp_22"
             android:text="Search : Fashion"/>

@@ -64,7 +64,6 @@ fun getProgressDialog(
     circularProgressDrawable.strokeWidth = 5f
     circularProgressDrawable.centerRadius = 30f
 
-    circularProgressDrawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         circularProgressDrawable.colorFilter = BlendModeColorFilter(
             ContextCompat.getColor(

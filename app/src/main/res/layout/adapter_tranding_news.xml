@@ -20,9 +20,9 @@
             android:layout_height="wrap_content"
             android:text="Trading Story"
             android:textColor="@color/textbox_hint"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/dp_10"
             android:textStyle="bold"
-            android:textSize="15dp"/>
+            android:textSize="@dimen/sp_16"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_tranding"
             android:layout_width="match_parent"

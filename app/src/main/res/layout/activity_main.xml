@@ -1,99 +1,105 @@
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="50dp"
             android:paddingLeft="30dp"
+            android:paddingTop="50dp"
             android:paddingRight="30dp">
-        <EditText
-            android:id="@+id/edt_fullname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_textbox"
-            android:hint="@string/your_full_name"
-            android:singleLine="true"
-            android:padding="15dp"
-            android:textColor="@color/textbox_hint"
-            android:textColorHint="@color/textbox_hint"
-            android:maxLines="1"
-            android:nextFocusDown="@id/edt_mobile"/>
-        <EditText
-            android:id="@+id/edt_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_textbox"
-            android:hint="@string/mobile_no"
-            android:layout_below="@+id/edt_fullname"
-            android:singleLine="true"
-            android:padding="15dp"
-            android:layout_marginTop="15dp"
-            android:maxLines="1"
-            android:textColor="@color/textbox_hint"
-            android:textColorHint="@color/textbox_hint"
-            android:nextFocusDown="@id/edt_city"
-            android:inputType="number"/>
-        <EditText
-            android:id="@+id/edt_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_textbox"
-            android:hint="@string/your_city"
-            android:singleLine="true"
-            android:layout_below="@+id/edt_mobile"
-            android:padding="15dp"
-            android:textColor="@color/textbox_hint"
-            android:textColorHint="@color/textbox_hint"
-            android:layout_marginTop="15dp"
-            android:maxLines="1"
-            android:nextFocusDown="@id/btn_submit" />
-        <Button
-            android:id="@+id/btn_submit"
-            android:layout_width="180dp"
-            android:layout_height="50dp"
-            android:text="SUBMIT"
-            android:textSize="18dp"
-            android:layout_below="@+id/edt_city"
-            android:background="@drawable/submit_button"
-            android:layout_centerHorizontal="true"
-            android:hint="@string/your_full_name"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_textbox"
+                android:hint="@string/your_full_name"
+                android:maxLines="1"
+                android:nextFocusDown="@id/edt_mobile"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="@color/textbox_hint"
+                android:textColorHint="@color/textbox_hint" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_fullname"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_textbox"
+                android:hint="@string/mobile_no"
+                android:inputType="number"
+                android:maxLines="1"
+                android:nextFocusDown="@id/edt_city"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="@color/textbox_hint"
+                android:textColorHint="@color/textbox_hint" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edt_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_mobile"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/rounded_textbox"
+                android:hint="@string/your_city"
+                android:maxLines="1"
+                android:nextFocusDown="@id/btn_submit"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textColor="@color/textbox_hint"
+                android:textColorHint="@color/textbox_hint" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/edt_city"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/submit_button2"
+                android:hint="@string/your_full_name"
+                android:text="@string/submit"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_20" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@+id/btn_submit"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_below="@+id/btn_submit">
+                android:orientation="vertical">
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_logo"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="@dimen/dp_200"
                     android:layout_gravity="center"
-                    android:src="@mipmap/screen_icon_logo"
-                    />
+                    android:src="@mipmap/screen_icon_logo" />
             </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/textbox_hint"
-                android:text="At NewsApp We Respect Your Privacy. By Continuing You Agree With T &amp; C. \n© 2021-2022"
                 android:layout_alignParentBottom="true"
-                android:padding="10dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:padding="@dimen/dp_10"
+                android:text="At NewsApp We Respect Your Privacy. By Continuing You Agree With T &amp; C. \n© 2021-2022"
+                android:textColor="@color/textbox_hint" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 </LinearLayout>

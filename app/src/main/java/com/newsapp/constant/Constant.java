@@ -81,9 +81,8 @@ public class Constant {
     public static final String WS_SETTINGS = BASE_URL + "getsettings.php";
     public static final String WS_HOME_BANNER = BASE_URL + "gethome_banner.php";
     public static final boolean SettingAPI_CALLED = false;
-    public static int ShareDescWords = 50;
     public static final String NEWS_ID = "id";
-
+    public static int ShareDescWords = 50;
     //********** SP ***************************
     public static String Android_version = "Android_version";
     public static String Appsharemsg = "Appsharemsg";

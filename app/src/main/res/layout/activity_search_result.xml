@@ -61,7 +61,7 @@
                     android:id="@+id/img_slider_next"
                     android:layout_height="50dp"
                     android:layout_width="50dp"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:visibility="gone"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -70,7 +70,7 @@
                     android:id="@+id/img_slider_perv"
                     android:layout_height="50dp"
                     android:layout_width="50dp"
-                    android:padding="10dp"
+                    android:padding="@dimen/dp_10"
                     android:visibility="gone"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
@@ -81,14 +81,14 @@
                     android:text="Fashion"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/sp_16"
                     android:layout_marginStart="10dp"
                     android:layout_above="@+id/txttitle"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txttitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="@dimen/dp_10"
                     android:textStyle="bold"
                     android:textSize="@dimen/sp_22"
                     android:textColor="@color/white"
@@ -109,11 +109,11 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="@dimen/dp_10"
                     android:textStyle="bold"
                     android:layout_marginStart="5dp"
                     android:textColor="@color/color_title_desc"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/sp_16"
                     android:text="For You"/>
                 <LinearLayout
                     android:layout_width="match_parent"

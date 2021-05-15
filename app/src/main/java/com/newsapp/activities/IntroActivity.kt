@@ -1,19 +1,27 @@
 package com.newsapp.activities
 
 import android.content.Intent
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.newsapp.R
 import com.newsapp.adpter.IntroAdapter
 import com.newsapp.api.ApiListeners
+import com.newsapp.browserIntent
 import com.newsapp.constant.Constant
 import com.newsapp.dto.IntroResponseModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_intro.*
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +41,7 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
+        setupLogo()
         fetchIntroImages()
 
         btGetStarted.setOnClickListener {
@@ -44,6 +53,36 @@ class IntroActivity : AppCompatActivity() {
             }
             finish()
         }
+    }
+
+    private fun setupLogo() {
+        val circularProgressDrawable = CircularProgressDrawable(this)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            circularProgressDrawable.colorFilter = BlendModeColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.black
+                ), BlendMode.SRC_ATOP
+            )
+        } else {
+            circularProgressDrawable.setColorFilter(
+                ContextCompat.getColor(
+                    this,
+                    R.color.black
+                ), PorterDuff.Mode.SRC_ATOP
+            )
+        }
+
+        circularProgressDrawable.start()
+
+        Picasso.with(applicationContext)
+            .load(Constant.LOGO)
+            .error(R.drawable.error_load)
+            .placeholder(circularProgressDrawable)
+            .into(ivAppLogo)
     }
 
     private fun fetchIntroImages() {
@@ -89,7 +128,9 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun setupOffersViewPager(homeBanner: List<IntroResponseModel.HomeBanner>) {
-        val adapter = IntroAdapter()
+        val adapter = IntroAdapter {
+            browserIntent(this, it.url)
+        }
         adapter.setItem(homeBanner)
         introViewpager.adapter = adapter
 

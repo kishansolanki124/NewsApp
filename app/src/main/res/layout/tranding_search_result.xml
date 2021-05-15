@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lin_view"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/lin_view"
+    android:layout_marginEnd="10dp"
     android:background="@color/white"
-    android:paddingBottom="10dp"
-    android:layout_marginEnd="10dp">
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/img_photo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@mipmap/ic_launcher"
             android:background="@drawable/rounded_corner"
             android:scaleType="fitXY"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            app:riv_corner_radius="8dip"
-            app:riv_border_width="1dip"
+            android:src="@mipmap/ic_launcher"
             app:riv_border_color="#FFFFFF"
+            app:riv_border_width="1dip"
+            app:riv_corner_radius="8dip"
             app:riv_mutate_background="true"
-            app:riv_tile_mode="clamp"
-            app:riv_oval="false"/>
+            app:riv_oval="false"
+            app:riv_tile_mode="clamp" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="15dp"
             android:layout_alignParentBottom="true"
-            android:textColor="@color/white"
+            android:background="@drawable/tranding_gradient"
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
-            android:background="@drawable/tranding_gradient"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"/>
+            android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_numnews"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="1/5"
-            android:textSize="@dimen/sp_14"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:gravity="center"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/tranding_numofnews"
+            android:gravity="center"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"/>
+            android:paddingRight="20dp"
+            android:text="1/5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14" />
     </RelativeLayout>
 </LinearLayout>

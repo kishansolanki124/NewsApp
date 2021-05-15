@@ -26,4 +26,5 @@
     <color name="transperent_black_for_taending_news">#4F000000</color>
     <color name="color_title_desc">#3c3c3c</color>
     <color name="color_datetime">#a3a3a3</color>
+    <color name="pink">#af1180</color>
 </resources>

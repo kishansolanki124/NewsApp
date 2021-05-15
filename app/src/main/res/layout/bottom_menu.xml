@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="@dimen/dp_10"
             android:gravity="center">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_home"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="@dimen/dp_10"
             android:gravity="center">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_search"
@@ -64,7 +64,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="@dimen/dp_10"
             android:gravity="center">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_upload"
@@ -86,7 +86,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="10dp"
+            android:padding="@dimen/dp_10"
             android:gravity="center">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_profile"
