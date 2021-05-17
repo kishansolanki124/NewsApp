@@ -48,7 +48,7 @@
         android:layout_height="@dimen/dp_200"
         android:layout_above="@id/btGetStarted"
         android:layout_centerHorizontal="true"
-        tools:src="@mipmap/screen_icon_logo" />
+        tools:src="@mipmap/ic_launcher" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btGetStarted"

@@ -283,7 +283,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
                         if (!response.body().getPopup_banner().isEmpty()) {
-                            setupRepeatableBannerAd(response.body().getPopup_banner());
+                            setupRepeatableBannerAd(response.body().getDelay_time(), response.body().getInitial_time(), response.body().getPopup_banner());
                         }
                     } else {
                         System.out.println(response.body().getMsg());
@@ -298,7 +298,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         });
     }
 
-    private void setupRepeatableBannerAd(List<PopupBannerResponse.PopupBanner> popup_banner) {
+    private void setupRepeatableBannerAd(String delayTime, String initialDelayTime, List<PopupBannerResponse.PopupBanner> popup_banner) {
         handler = new Handler();
         runnableCode = new Runnable() {
             @Override
@@ -307,13 +307,13 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                     if ((DetailScreen.this).getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
                         AppUtilsKt.showProgressDialog(DetailScreen.this, popup_banner);
                     }
-                    handler.postDelayed(this, Constant.AppFullScreenBannerAd.adBetweenTime);
+                    handler.postDelayed(this, Long.parseLong(delayTime) * 1000);
                 }
             }
         };
 
         if (!isDestroyed() && (!(DetailScreen.this).isFinishing())) {
-            handler.postDelayed(runnableCode, Constant.AppFullScreenBannerAd.adDelayTime);
+            handler.postDelayed(runnableCode, Long.parseLong(initialDelayTime) * 1000);
         }
     }
 

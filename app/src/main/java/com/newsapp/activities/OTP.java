@@ -1,7 +1,5 @@
 package com.newsapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.newsapp.R;
 import com.newsapp.api.ApiListeners;
@@ -28,24 +28,25 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OTP extends AppCompatActivity {
 
+    public ApiListeners apiListeners;
     Button btn_submitl;
     ImageView img_logo;
     EditText edt_otp;
-    public ApiListeners apiListeners;
     ProgressDialog pb;
-    String mobile,otp,name;
+    String mobile, otp, name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_o_t_p);
         getSupportActionBar().hide();
-        btn_submitl =findViewById(R.id.btn_submit);
-        edt_otp =findViewById(R.id.edt_otp);
-        img_logo=findViewById(R.id.img_logo);
+        btn_submitl = findViewById(R.id.btn_submit);
+        edt_otp = findViewById(R.id.edt_otp);
+        img_logo = findViewById(R.id.img_logo);
         Init();
-        mobile=getIntent().getStringExtra("mobile");
-        name=getIntent().getStringExtra("name");
-        otp=getIntent().getIntExtra("otp",0)+"";
+        mobile = getIntent().getStringExtra("mobile");
+        name = getIntent().getStringExtra("name");
+        otp = getIntent().getIntExtra("otp", 0) + "";
         Picasso.with(getApplicationContext())
                 .load(Constant.LOGO)
                 .error(R.drawable.error_load)
@@ -54,15 +55,15 @@ public class OTP extends AppCompatActivity {
         btn_submitl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean isValid=true;
-                String msg="";
-                if(!edt_otp.getText().toString().equals(otp)){
-                    isValid=true;
-                    msg="OTP Invalid.!";
-                    Toast.makeText(OTP.this, msg, Toast.LENGTH_SHORT).show();
+                boolean isValid = true;
+                String msg = "";
+                if (!edt_otp.getText().toString().equals(otp)) {
+                    isValid = true;
+                    msg = "OTP Invalid.!";
+                    //Toast.makeText(OTP.this, msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(isValid){
+                if (isValid) {
                     VarifyOtp();
                 }
             }
@@ -72,31 +73,31 @@ public class OTP extends AppCompatActivity {
     private void Init() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.SECONDS)
-                .readTimeout(100,TimeUnit.SECONDS).build();
+                .readTimeout(100, TimeUnit.SECONDS).build();
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constant.BASE_URL).client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiListeners = retrofit.create(ApiListeners.class);
-        pb=new ProgressDialog(OTP.this);
+        pb = new ProgressDialog(OTP.this);
         pb.setMessage("Please Wait...!");
         pb.setCancelable(false);
     }
 
-    public void VarifyOtp(){
+    public void VarifyOtp() {
         pb.show();
-        final Call<SaveUser> getUserInfoVoCall = apiListeners.VarifyOTP(edt_otp.getText().toString(),mobile);
+        final Call<SaveUser> getUserInfoVoCall = apiListeners.VarifyOTP(edt_otp.getText().toString(), mobile);
         getUserInfoVoCall.enqueue(new Callback<SaveUser>() {
             @Override
             public void onResponse(Call<SaveUser> call, Response<SaveUser> response) {
                 pb.dismiss();
-                if(response.body() != null){
-                    if(response.body().getSuccess()){
-                        Constant.save_sp(OTP.this,name,mobile);
+                if (response.body() != null) {
+                    if (response.body().getSuccess()) {
+                        Constant.save_sp(OTP.this, name, mobile);
                         finish();
                         startActivity(new Intent(OTP.this, Home.class));
                         Toast.makeText(OTP.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         Toast.makeText(OTP.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }

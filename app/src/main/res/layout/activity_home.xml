@@ -211,9 +211,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_logo"
-            android:layout_width="@dimen/dp_250"
-            android:layout_height="@dimen/dp_200"
-            android:src="@mipmap/screen_icon_logo" />
+            android:layout_width="@dimen/dp_300"
+            android:layout_height="@dimen/dp_250"
+            android:src="@mipmap/ic_launcher" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -223,7 +223,7 @@
         android:background="@color/background_gray"
         android:gravity="center"
         android:padding="@dimen/dp_10"
-        android:text="News App is the first sentence search engine that helps you to update with fresh stories from your city"
+        android:text="Excuse Me is the first sentence search engine that helps you to update with fresh stories from your city"
         android:textColor="@color/textbox_hint"
         android:visibility="gone" />
 

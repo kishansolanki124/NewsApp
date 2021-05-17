@@ -1,19 +1,12 @@
-home screen banner api https://colorsofgujarat.co.in/newsapp/newsappapi/gethome_banner
-
-
-screen banner api https://colorsofgujarat.co.in/newsapp/newsappapi/getnews_banner
-news banner aa api ma set karyu che check kari le jo ne ek var https://colorsofgujarat.co.in/newsapp/newsappapi/getnews.php
-popup banner api https://colorsofgujarat.co.in/newsapp/newsappapi/getpopup_banner
-news_screen
-news_detail_screen
-search_screen
-search_result_screen
-upload_screen
-je te screen ma tamare aa value pass karvani che popup banner mate
-all banner image path https://colorsofgujarat.co.in/newsapp/uploads/banner_img/
-image path api path app ma may be dynamic jevu hase avi rite j rakh jo bcoz aa testing server che main domain ma jase atle url ne e badhu change thai jase
-
-
 one signal:
 email : whatsnewtoday2018@gmail.com
 password : whatsnew@2018
+
+(૧) ન્યુઝની વચ્ચેના બેનરની હાઇટ વધારવી છે... નવા બેનર અપલોડ કર્યા છે તે મુજબ અને ફુલ વિડ્થમાં બંને સાઇડ બેનર ટચ થઇ જાય છે તે રીતે કરવાનું છે...
+(ર) એપનું આઇકન ચેન્જ કરવાનું છે. મેઇન એપનું નામ NewsApp રીપ્લેસ કરીને Excuse Me  ખય રાખવું...
+(૩) પોપઅપ બેનર વચ્ચેનો ટાઇમ થોડો વધારવો પડશે તરત જ આવે છે બીજી વાર ૭-૮ સેકન્ડમાં આવી જાય છે... (નંદિશભાઇ સાથે વાત કરવી)
+(૪) ન્યુઝ ડીટેઇલમાં ન્યુઝના ટેકસ્ટ આવે છે તે જસ્ટીફાય કરવા.
+(પ) ઓટીપીનું ટોસ્ટ આવે છે ઇ કલોઝ કરવાનું છે...
+(૬) રીજસ્ટરનું ફોર્મ છે ત્યારે નીચે કોપીરાઇટ મેસેજ આવે એમાં NewsApp વર્ડ રીપ્લેસ કરીને Excuse Me કરવાનું છે.
+(૭) નોટીફીકેશન આવે ત્યારે એલર્ટમાં News App આવે છે ત્યાં પણ Excuse Me કરવાનું છે.
+(૮) પ્રોફાઇલમાં મેઇન લોગો થોડોક મોટો કરવો. લોગો નીચે ટેકસ્ટ છે તેમાં News App ના બદલે Excuse Me કરવું...

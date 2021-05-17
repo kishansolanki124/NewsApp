@@ -62,7 +62,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
     private final int STORAGE_PERMISSION_CODE = 1;
-    private ArrayList<NewsBanner> newsBannerList;
     public ApiListeners apiListeners;
     /*Start Load More*/
     public int page = 1;
@@ -78,6 +77,7 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     TextView txt_norecfound;
     LinearLayout lin_spinner;
     ImageView img_spinner_city, img_slider_next, img_slider_perv;
+    private ArrayList<NewsBanner> newsBannerList;
     private Handler handler = null;
     private Runnable runnableCode = null;
     private ArrayList<News.Data> regularNewsList, trendingNewsList, list2_slider;
@@ -282,7 +282,9 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     }
 
     public void getRegularNews() {
-        pb.show();
+        if (!isDestroyed() && (!(Home.this).isFinishing())) {
+            pb.show();
+        }
         if (sel_city_id.equalsIgnoreCase("0")) {
             sel_city_id = "";
         }
@@ -585,7 +587,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
                         if (!response.body().getPopup_banner().isEmpty()) {
-                            setupRepeatableBannerAd(response.body().getPopup_banner());
+                            setupRepeatableBannerAd(response.body().getDelay_time(), response.body().getInitial_time(),
+                                    response.body().getPopup_banner());
                         }
                     } else {
                         System.out.println(response.body().getMsg());
@@ -600,7 +603,7 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         });
     }
 
-    private void setupRepeatableBannerAd(List<PopupBannerResponse.PopupBanner> popup_banner) {
+    private void setupRepeatableBannerAd(String delayTime, String initialDelayTime, List<PopupBannerResponse.PopupBanner> popup_banner) {
         handler = new Handler();
         runnableCode = new Runnable() {
             @Override
@@ -609,13 +612,13 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                     if ((Home.this).getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
                         AppUtilsKt.showProgressDialog(Home.this, popup_banner);
                     }
-                    handler.postDelayed(this, Constant.AppFullScreenBannerAd.adBetweenTime);
+                    handler.postDelayed(this, Long.parseLong(delayTime) * 1000);
                 }
             }
         };
 
         if (!isDestroyed() && (!(Home.this).isFinishing())) {
-            handler.postDelayed(runnableCode, Constant.AppFullScreenBannerAd.adDelayTime);
+            handler.postDelayed(runnableCode, Long.parseLong(initialDelayTime) * 1000);
         }
     }
 

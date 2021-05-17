@@ -86,12 +86,12 @@
                             android:textSize="@dimen/sp_12"
                             tools:text="Fashion" />
 
-                        <!--                    android:justificationMode="inter_word"-->
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txt_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_10"
+                            android:justificationMode="inter_word"
                             android:lineSpacingMultiplier="1.1"
                             android:textColor="@color/color_title_desc"
                             android:textSize="@dimen/sp_18"
@@ -138,12 +138,12 @@
                             </LinearLayout>
                         </LinearLayout>
 
-                        <!--                    android:justificationMode="inter_word"-->
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txt_desc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_10"
+                            android:justificationMode="inter_word"
                             android:lineSpacingMultiplier="1.1"
                             android:textColor="@color/color_title_desc"
                             tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_margin="@dimen/dp_10"
-                        android:indeterminateTint="@color/dark_blue"
+                        android:indeterminateTint="@color/pink"
                         android:indeterminateTintMode="multiply"
                         android:visibility="gone" />
                 </RelativeLayout>

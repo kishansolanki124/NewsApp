@@ -48,6 +48,6 @@
             android:id="@+id/img_logo"
             android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_200"
-            android:src="@mipmap/screen_icon_logo" />
+            android:src="@mipmap/ic_launcher" />
     </LinearLayout>
 </LinearLayout>

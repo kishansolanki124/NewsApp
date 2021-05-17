@@ -89,7 +89,7 @@
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="@dimen/dp_200"
                     android:layout_gravity="center"
-                    android:src="@mipmap/screen_icon_logo" />
+                    android:src="@mipmap/ic_launcher" />
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -98,7 +98,7 @@
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:padding="@dimen/dp_10"
-                android:text="At NewsApp We Respect Your Privacy. By Continuing You Agree With T &amp; C. \n© 2021-2022"
+                android:text="At Excuse Me We Respect Your Privacy. By Continuing You Agree With T &amp; C. \n© 2021-2022"
                 android:textColor="@color/textbox_hint" />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

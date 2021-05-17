@@ -25,6 +25,7 @@ fun Context.showToast(string: String) {
 }
 
 private var pgDialog: Dialog? = null
+private var newsBannerAdCurrentIndex = 0
 
 fun showProgressDialog(context: Context, popup_banner: List<PopupBannerResponse.PopupBanner>) {
     if (pgDialog == null) {
@@ -54,8 +55,12 @@ fun getProgressDialog(
         dismissProgressDialog()
     }
 
+    if (popup_banner.size - 1 < newsBannerAdCurrentIndex) {
+        newsBannerAdCurrentIndex = 0
+    }
+
     ivAppBanner.setOnClickListener {
-        browserIntent(context, popup_banner[0].url)
+        browserIntent(context, popup_banner[newsBannerAdCurrentIndex].url)
         dismissProgressDialog()
     }
 
@@ -82,7 +87,7 @@ fun getProgressDialog(
     circularProgressDrawable.start()
 
     Picasso.with(ivAppBanner.context)
-        .load(Constant.BANNER + popup_banner[0].up_pro_img)
+        .load(Constant.BANNER + popup_banner[newsBannerAdCurrentIndex].up_pro_img)
         .error(R.drawable.error_load)
         .placeholder(circularProgressDrawable)
         .into(ivAppBanner)
@@ -104,6 +109,8 @@ fun getProgressDialog(
             WindowManager.LayoutParams.MATCH_PARENT
         )
     }
+
+    newsBannerAdCurrentIndex += 1
     return progressDialog
 }
 

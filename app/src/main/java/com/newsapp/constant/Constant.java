@@ -501,8 +501,8 @@ public class Constant {
     }
 
     public interface AppFullScreenBannerAd {
-        long adDelayTime = 5000;
-        long adBetweenTime = 25000;
+        //        long adDelayTime = 5000;
+//        long adBetweenTime = 25000;
         String home = "news_screen";
         String news_detail_screen = "news_detail_screen";
         String search_screen = "search_screen";
