@@ -262,10 +262,11 @@ public class NewsDetail extends AppCompatActivity {
         txt_tag.setOnClickListener(view -> Search.gotoSearchPage(NewsDetail.this, "", newsData.getCid(),
                 "", "", "", newsData.getKeywords()));
         img_share.setOnClickListener(view -> {
-            String shareBody = Constant.get_sp(getApplicationContext(), Constant.Postsharemsg) + "\n\n"
-                    + HtmlCompat.fromHtml(newsData.getDescription().substring(0, Math.min(newsData.getDescription().length(), Constant.ShareDescWords)),
-                    HtmlCompat.FROM_HTML_MODE_COMPACT);
-            Constant.shareImage(getApplicationContext(), shareBody, Constant.POST + newsData.getUp_pro_img(), null);
+            String shareBody = "*" + HtmlCompat.fromHtml(newsData.getName(), HtmlCompat.FROM_HTML_MODE_COMPACT)
+                    + "*\n\n" + HtmlCompat.fromHtml(newsData.getDescription().substring(0,
+                    Math.min(newsData.getDescription().length(), Constant.ShareDescWords)) + "...\n\n"
+                    + Constant.get_sp(this, Constant.Postsharemsg), HtmlCompat.FROM_HTML_MODE_COMPACT);
+            Constant.shareImage(this, shareBody, Constant.POST + newsData.getUp_pro_img(), null);
         });
         img_back.setOnClickListener(view -> finish());
         ivBookmark.setOnClickListener(view -> {

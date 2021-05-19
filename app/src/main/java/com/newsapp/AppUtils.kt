@@ -44,6 +44,7 @@ fun getProgressDialog(
     context: Context,
     popup_banner: List<PopupBannerResponse.PopupBanner>
 ): Dialog {
+    var currentIndex = 0
     val progressDialog = Dialog(context)
     val view: View = View.inflate(context, R.layout.dialog_progress, null)
     //LayoutInflater.from(context).inflate(R.layout.dialog_progress, parent, false)
@@ -58,9 +59,10 @@ fun getProgressDialog(
     if (popup_banner.size - 1 < newsBannerAdCurrentIndex) {
         newsBannerAdCurrentIndex = 0
     }
+    currentIndex = newsBannerAdCurrentIndex
 
     ivAppBanner.setOnClickListener {
-        browserIntent(context, popup_banner[newsBannerAdCurrentIndex].url)
+        browserIntent(context, popup_banner[currentIndex].url)
         dismissProgressDialog()
     }
 
@@ -87,7 +89,7 @@ fun getProgressDialog(
     circularProgressDrawable.start()
 
     Picasso.with(ivAppBanner.context)
-        .load(Constant.BANNER + popup_banner[newsBannerAdCurrentIndex].up_pro_img)
+        .load(Constant.BANNER + popup_banner[currentIndex].up_pro_img)
         .error(R.drawable.error_load)
         .placeholder(circularProgressDrawable)
         .into(ivAppBanner)
