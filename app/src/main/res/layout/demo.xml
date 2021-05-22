@@ -1,172 +1,169 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lin_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/lin_mainlayout"
+    <com.newsapp.apputils.CustomVerticalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="visible">
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray" />
+                android:layout_height="match_parent"
+                android:background="@color/gray"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
 
-            <LinearLayout
-                android:id="@+id/llNewsPostedBy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="horizontal">
-
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/img_propic"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/profile_pic"
-                    app:civ_border_color="@color/white"
-                    app:civ_border_width="2dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_title_desc"
-                        android:textSize="@dimen/sp_14"
-                        tools:text="Tara Sutariya" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txt_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_datetime"
-                        android:textSize="@dimen/sp_12"
-                        tools:text="03-05-2021 10:21 AM" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10"
-                android:lineSpacingMultiplier="1.1"
-                android:textColor="@color/color_title_desc"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"
-                tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
-
-            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/img_photo"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_180"
-                android:layout_marginHorizontal="@dimen/dp_10"
-                android:background="@drawable/rounded_corner"
-                android:scaleType="centerCrop"
-                app:riv_border_color="@android:color/white"
-                app:riv_border_width="@dimen/dp_1"
-                app:riv_corner_radius="@dimen/dp_10"
-                app:riv_mutate_background="true"
-                app:riv_oval="false"
-                app:riv_tile_mode="clamp"
-                tools:src="@drawable/profile_pic" />
-
-            <RelativeLayout
-                android:id="@+id/rlImageBottom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_10">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/edt_logo"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/upload_story_image" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_tag"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/tag"
-                    android:padding="@dimen/dp_10"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_12"
-                    tools:ignore="RelativeOverlap"
-                    tools:text="Fashion" />
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/upload_your_story"
+                    android:textColor="@color/textbox_hint"
+                    android:textSize="@dimen/sp_22"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_share"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_toStartOf="@+id/img_bookmark"
-                    android:padding="2dp"
-                    android:src="@drawable/ic_baseline_share_gray_24" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/img_bookmark"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="10dp"
-                    android:padding="2dp"
-                    android:src="@drawable/ic_baseline_bookmark_gray_border_24" />
-            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/lincontact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="Guideline: Make sure that any information related to pornographic subjects is strictly prohibited. The behavior of public violation content is also not allowed. Post your own stories &amp; information in a positive way only. Readers can share it if the story feels more adorable."
+                    android:textColor="@color/textbox_hint"
+                    android:textSize="@dimen/sp_12" />
+                <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+                <Spinner
+                    android:id="@+id/sp_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/rounded_textbox"
+                    android:overlapAnchor="false" />
+
+                <Spinner
+                    android:id="@+id/sp_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/rounded_textbox"
+                    android:overlapAnchor="false" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_textbox"
+                    android:hint="@string/title"
+                    android:padding="15dp"
+                    android:textColor="@color/textbox_hint"
+                    android:textColorHint="@color/textbox_hint"
+                    android:visibility="gone" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_heading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/rounded_textbox"
+                    android:hint="@string/title"
+                    android:padding="15dp"
+                    android:textColor="@color/textbox_hint"
+                    android:textColorHint="@color/textbox_hint" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edt_inquiry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/rounded_textbox"
+                    android:gravity="start"
+                    android:hint="@string/desc"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:maxLines="10"
+                    android:padding="15dp"
+                    android:textColor="@color/textbox_hint"
+                    android:textColorHint="@color/textbox_hint" />
+
+                <LinearLayout
+                    android:id="@+id/lin_filechoose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/edt_upload"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/capture" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/upload_photos"
+                        android:textColor="@color/textbox_hint"
+                        android:textColorHint="@color/textbox_hint"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/multiple_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_submit"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/submit_button2"
+                    android:text="@string/submit"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_20" />
+            </LinearLayout>
         </LinearLayout>
+    </com.newsapp.apputils.CustomVerticalScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/background_gray" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lin_trading_story"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/background_gray" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:text="@string/Tending_Story"
-            android:textColor="@color/textbox_hint"
-            android:textSize="@dimen/sp_16"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rec_tranding"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@color/background_gray" />
-    </LinearLayout>
+    <include layout="@layout/bottom_menu" />
 </LinearLayout>

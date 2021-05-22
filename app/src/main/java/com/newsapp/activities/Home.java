@@ -1,7 +1,6 @@
 package com.newsapp.activities;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -14,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +23,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Lifecycle;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,20 +61,24 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
+
     private final int STORAGE_PERMISSION_CODE = 1;
     public ApiListeners apiListeners;
-    /*Start Load More*/
     public int page = 1;
     SliderView img_slider;
+    ProgressBar pbTop, pbBottom;
+    LinearLayoutManager rvLayoutManager;
+    NestedScrollView nsvRoot;
     RecyclerView rec_for_you;
     SliderAdapter sliderAdapter;
-    ProgressDialog pb;
+    //ProgressDialog pb;
     Spinner sp_city;
     ArrayAdapter<String> ardb_city;
     ArrayList<String> ar_city_name, ar_city_id;
-    boolean firsttime = true;
+    boolean firstTime = true;
+    boolean isLoading = false;
     String sel_city_id = "0";
-    TextView txt_norecfound;
+    //TextView txt_norecfound;
     LinearLayout lin_spinner;
     ImageView img_spinner_city, img_slider_next, img_slider_perv;
     private ArrayList<NewsBanner> newsBannerList;
@@ -84,7 +88,38 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     private int newsBannerAdCurrentIndex = 0;
     private SearchResultAdapter newsListAdapter;
     private int total_page;
-    private boolean isLoadMoreApiCall = true;
+    // region Listeners
+//    RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
+//        @Override
+//        public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState) {
+//            super.onScrollStateChanged(recyclerView, newState);
+//        }
+//
+//        @Override
+//        public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
+//            super.onScrolled(recyclerView, dx, dy);
+//            int visibleItemCount = rvLayoutManager.getChildCount();
+//            int totalItemCount = rvLayoutManager.getItemCount();
+//            int firstVisibleItemPosition = rvLayoutManager.findFirstVisibleItemPosition();
+//            if (!isLoading && total_page >= page) {
+//                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount
+//                        && firstVisibleItemPosition >= 0
+//                ) {
+//                    getRegularNews();
+//                }
+//            }
+////            if (!isLoading && total_page >= page) {
+////                if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
+////                        && firstVisibleItemPosition >= 0
+////                    //&& totalItemCount >= PAGE_SIZE
+////                ) {
+////                    getRegularNews();
+////                    //Call Load More
+////                    isLoadMoreApiCall = false;
+////                }
+////            }
+//        }
+//    };
     private int mSelectedIndex = 0;
     private int previous_sel_id = 0;
 
@@ -94,10 +129,14 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         setContentView(R.layout.activity_search_result);
         Objects.requireNonNull(getSupportActionBar()).hide();
         Constant.setBottomMenuSelected(Home.this, 0);
+
+        pbTop = findViewById(R.id.pbTop);
+        pbBottom = findViewById(R.id.pbBottom);
+
         img_slider = findViewById(R.id.img_slider);
         rec_for_you = findViewById(R.id.rec_for_you);
         sp_city = findViewById(R.id.sp_city);
-        txt_norecfound = findViewById(R.id.txt_norecfound);
+        //txt_norecfound = findViewById(R.id.txt_norecfound);
         lin_spinner = findViewById(R.id.lin_spinner);
         img_spinner_city = findViewById(R.id.img_spinner_city);
         img_slider_next = findViewById(R.id.img_slider_next);
@@ -107,8 +146,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         regularNewsList = new ArrayList<>();
         trendingNewsList = new ArrayList<>();
         Init();
-
-        getTranding();
+        initRecyclerView();
+        getTrendingNews();
         getSlider();
         getCities();
         getSettings();
@@ -130,9 +169,9 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                 .build();
 
         apiListeners = retrofit.create(ApiListeners.class);
-        pb = new ProgressDialog(Home.this);
-        pb.setMessage("Please Wait...!");
-        pb.setCancelable(false);
+        //pb = new ProgressDialog(Home.this);
+        //pb.setMessage("Please Wait...!");
+        //pb.setCancelable(false);
 
         if (ContextCompat.checkSelfPermission(Home.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -201,20 +240,20 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                                 // Set the value for selected index variable
                                 mSelectedIndex = i;
                                 sel_city_id = ar_city_id.get(i);
-                                if (!firsttime) {
+                                if (!firstTime) {
                                     regularNewsList.clear();
                                     trendingNewsList.clear();
                                     page = 1;
-                                    firsttime = false;
+                                    firstTime = false;
                                 }
                                 if (previous_sel_id != mSelectedIndex) {
                                     ((View) view.getParent().getParent()).setBackgroundResource(R.drawable.spinner);
                                 }
                                 previous_sel_id = mSelectedIndex;
-                                if (!firsttime) {
-                                    getTranding();
+                                if (!firstTime) {
+                                    getTrendingNews();
                                 }
-                                firsttime = false;
+                                firstTime = false;
                             }
 
                             @Override
@@ -282,9 +321,10 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
     }
 
     public void getRegularNews() {
-        if (!isDestroyed() && (!(Home.this).isFinishing())) {
-            pb.show();
-        }
+        isLoading = true;
+//        if (!isDestroyed() && (!(Home.this).isFinishing())) {
+//            pb.show();
+//        }
         if (sel_city_id.equalsIgnoreCase("0")) {
             sel_city_id = "";
         }
@@ -293,9 +333,12 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         getUserInfoVoCall.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-                if (!isDestroyed() && (!(Home.this).isFinishing())) {
-                    pb.dismiss();
-                }
+//                if (!isDestroyed() && (!(Home.this).isFinishing())) {
+//                    pb.dismiss();
+//                }
+                isLoading = false;
+                pbTop.setVisibility(View.GONE);
+                pbBottom.setVisibility(View.INVISIBLE);
 
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
@@ -349,41 +392,30 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 
                             regularNewsList.add(obj);
 
-                            if (page == 2) {
-                                newsListAdapter = new SearchResultAdapter(regularNewsList, trendingNewsList, Home.this);
-                                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-                                rec_for_you.setLayoutManager(mLayoutManager);
-                                rec_for_you.setItemAnimator(new DefaultItemAnimator());
-                                rec_for_you.setAdapter(newsListAdapter);
-                            } else {
-                                if (newsListAdapter != null) {
-                                    isLoadMoreApiCall = true;
-                                    newsListAdapter.notifyDataSetChanged();
-                                }
-                            }
-                            rec_for_you.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                @Override
-                                public void onScrollStateChanged(@NotNull RecyclerView recyclerView, int newState) {
-                                    super.onScrollStateChanged(recyclerView, newState);
-                                    if (total_page >= page) {
-                                        if (isLoadMoreApiCall) {
-                                            getRegularNews();
-                                            //Call Load More
-                                            isLoadMoreApiCall = false;
-                                        }
-                                    }
-                                }
-                            });
+//                            if (page == 2) {
+//                                newsListAdapter = new SearchResultAdapter(regularNewsList, trendingNewsList, Home.this);
+//                                rvLayoutManager = new LinearLayoutManager(getApplicationContext());
+//                                rec_for_you.setLayoutManager(rvLayoutManager);
+//                                rec_for_you.setItemAnimator(new DefaultItemAnimator());
+//                                rec_for_you.setAdapter(newsListAdapter);
+//
+//                            } else {
+//                                if (newsListAdapter != null) {
+//                                    isLoadMoreApiCall = true;
+//                                    newsListAdapter.notifyDataSetChanged();
+//                                }
+//                            }
                         }
-                        if (regularNewsList.size() == 0) {
-                            txt_norecfound.setText(getString(R.string.no_record_found));
-                            txt_norecfound.setVisibility(View.VISIBLE);
-                            rec_for_you.setVisibility(View.GONE);
-                        } else {
-                            txt_norecfound.setText(getString(R.string.loading));
-                            txt_norecfound.setVisibility(View.GONE);
-                            rec_for_you.setVisibility(View.VISIBLE);
-                        }
+                        newsListAdapter.notifyDataSetChanged();
+//                        if (regularNewsList.size() == 0) {
+//                            //txt_norecfound.setText(getString(R.string.no_record_found));
+//                            //txt_norecfound.setVisibility(View.VISIBLE);
+//                            rec_for_you.setVisibility(View.GONE);
+//                        } else {
+//                            //txt_norecfound.setText(getString(R.string.loading));
+//                            //txt_norecfound.setVisibility(View.GONE);
+//                            rec_for_you.setVisibility(View.VISIBLE);
+//                        }
                     } else {
                         Toast.makeText(Home.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
@@ -392,14 +424,16 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                pb.dismiss();
+                pbTop.setVisibility(View.GONE);
+                pbBottom.setVisibility(View.INVISIBLE);
+                //pb.dismiss();
+                isLoading = false;
                 Toast.makeText(Home.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    public void getTranding() {
-//        pb.show();
+    public void getTrendingNews() {
         if (sel_city_id.equalsIgnoreCase("0")) {
             sel_city_id = "";
         }
@@ -408,7 +442,6 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         getUserInfoVoCall.enqueue(new Callback<News>() {
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
-//                pb.dismiss();
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
                         trendingNewsList = new ArrayList<>();
@@ -416,18 +449,19 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
                             News.Data data = response.body().getData().get(i);
                             data.setnumRecords((i + 1) + "/" + response.body().getData().size());
                             trendingNewsList.add(data);
+                            newsListAdapter.setTrendingNews(trendingNewsList);
                         }
                     } else {
                         Toast.makeText(Home.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
                 }
-
+                pbTop.setVisibility(View.VISIBLE);
+                pbBottom.setVisibility(View.GONE);
                 getRegularNews();
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-//                pb.dismiss();
                 getRegularNews();
                 Toast.makeText(Home.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
@@ -499,7 +533,6 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
             }
         });
     }
-
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -628,5 +661,26 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         if (null != handler) {
             handler.removeCallbacks(runnableCode);
         }
+    }
+
+    private void initRecyclerView() {
+        nsvRoot = findViewById(R.id.nsvRoot);
+        rvLayoutManager = new LinearLayoutManager(this);
+        rec_for_you.setLayoutManager(rvLayoutManager);
+        newsListAdapter = new SearchResultAdapter(regularNewsList, trendingNewsList, this);
+        rec_for_you.setAdapter(newsListAdapter);
+
+        nsvRoot.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (v.getChildAt(v.getChildCount() - 1) != null) {
+                if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) &&
+                        scrollY > oldScrollY) {
+                    //code to fetch more data for endless scrolling
+                    if (!isLoading && total_page >= page) {
+                        pbBottom.setVisibility(View.VISIBLE);
+                        getRegularNews();
+                    }
+                }
+            }
+        });
     }
 }

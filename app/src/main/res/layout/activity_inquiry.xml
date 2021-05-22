@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,15 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_gray"
-        android:paddingBottom="20dp">
+        android:paddingBottom="@dimen/dp_20">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imglogo"
-            android:layout_width="@dimen/dp_200"
-            android:layout_height="@dimen/dp_150"
+            android:layout_width="@dimen/dp_250"
+            android:layout_height="@dimen/dp_100"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_20"
-            android:src="@mipmap/ic_launcher" />
+            tools:src="@mipmap/ic_launcher" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgback"
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imglogo"
             android:gravity="center"
-            android:paddingHorizontal="30dp"
+            android:paddingHorizontal="@dimen/dp_30"
             android:text="Excuse Me is the first sentence search engine that helps you to update with fresh stories from your city"
             android:textColor="@color/textbox_hint" />
     </RelativeLayout>
@@ -39,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingVertical="@dimen/dp_15">
+        android:paddingVertical="@dimen/dp_10">
 
         <LinearLayout
             android:id="@+id/lin_about"
@@ -93,7 +94,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray"

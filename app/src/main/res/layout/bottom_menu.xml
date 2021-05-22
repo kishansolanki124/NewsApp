@@ -5,15 +5,15 @@
     android:background="@android:color/transparent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray_border"
-        android:scaleType="fitXY" />
+        android:background="@color/gray_border" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -23,12 +23,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10">
+            android:paddingVertical="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_home"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/dp_25"
                 android:src="@drawable/menu_icon_home_active" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -36,9 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Home"
+                android:text="@string/Home"
                 android:textColor="@color/pink"
-                android:textSize="14dp" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,12 +48,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10">
+            android:paddingVertical="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_search"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/dp_25"
                 android:src="@drawable/menu_icon_search" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -61,9 +61,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Search"
+                android:text="@string/Search"
                 android:textColor="@color/footer_unselect_text"
-                android:textSize="14dp" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,12 +73,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10">
+            android:paddingVertical="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_upload"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/dp_25"
                 android:src="@drawable/menu_icon_upload" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -86,9 +86,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Upload"
+                android:text="@string/Upload"
                 android:textColor="@color/footer_unselect_text"
-                android:textSize="14dp" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,12 +98,12 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="@dimen/dp_10">
+            android:paddingVertical="@dimen/dp_10">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_profile"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="@dimen/dp_25"
                 android:src="@drawable/menu_icon_user" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -111,9 +111,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Profile"
+                android:text="@string/Profile"
                 android:textColor="@color/footer_unselect_text"
-                android:textSize="14dp" />
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

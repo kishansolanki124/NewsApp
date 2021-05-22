@@ -56,7 +56,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
     ArrayList<String> ar_sliders;
     private Handler handler = null;
     private Runnable runnableCode = null;
-    private OtherStoryAdapter mAdapter;
+    private OtherStoryAdapter otherStoryAdapter;
     private SimpleSliderAdapter adapter;
 
     @Override
@@ -88,8 +88,11 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         txt_title.setText(newsData.getName().trim());
         txt_name.setText(newsData.getUpload_by());
         txt_date.setText(newsData.getPdate());
-        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
-        txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
+        //txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
+        //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
+        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());//todo work here
+
         if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
             imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
         } else {
@@ -161,13 +164,13 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                 pb.dismiss();
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
-                        list = (ArrayList<News.Data>) response.body().getData();
+                        list = response.body().getData();
                         // Other Stories
-                        mAdapter = new OtherStoryAdapter(list, DetailScreen.this);
+                        otherStoryAdapter = new OtherStoryAdapter(list, DetailScreen.this);
                         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         rec_otherstory.setLayoutManager(mLayoutManager);
                         rec_otherstory.setItemAnimator(new DefaultItemAnimator());
-                        rec_otherstory.setAdapter(mAdapter);
+                        rec_otherstory.setAdapter(otherStoryAdapter);
                     } else {
                         Toast.makeText(DetailScreen.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }

@@ -1,6 +1,7 @@
 package com.newsapp.adpter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -8,10 +9,12 @@ import android.widget.ImageView;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.newsapp.R;
+import com.newsapp.activities.DisplayPictureActivity;
 import com.newsapp.constant.Constant;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +56,10 @@ public class SimpleSliderAdapter extends SliderViewAdapter<SimpleSliderAdapter.S
                 //.placeholder(R.drawable.loading)
                 .placeholder(circularProgressDrawable)
                 .into(holder.img_photo);
+
+        holder.img_photo.setOnClickListener(view -> context.startActivity(new Intent(context, DisplayPictureActivity.class)
+                .putExtra(Constant.IMAGE_POSITION, position)
+                .putExtra(Constant.IMAGE_LIST, (Serializable) mSliderItems)));
     }
 
     // this method will return

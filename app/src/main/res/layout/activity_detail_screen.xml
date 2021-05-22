@@ -109,7 +109,7 @@
                                 android:id="@+id/img_profile"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:src="@mipmap/ic_launcher"
+                                android:src="@drawable/user_icon"
                                 app:civ_border_color="@color/white"
                                 app:civ_border_width="2dp" />
 
@@ -144,9 +144,14 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_10"
                             android:justificationMode="inter_word"
+                            android:autoLink="web"
                             android:lineSpacingMultiplier="1.1"
-                            android:textColor="@color/color_title_desc"
-                            tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari KurtasSara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
+                            android:text="ભાવનગર જિલ્લાના સિહોર ગામની પાસે આવેલ સિહોર-ટાણા રોડની પર આવેલ જમીન પર પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે, જેને લઈ વિસ્તારની આજુબાજુના 100 મીટર સુધીના વિસ્તારમાં કોઈપણ શખ્સે પ્રવેશ કરવા તથા ઢોર ચરાવવા બાબતે પ્રતિબંધ મૂકતું જાહેરનામું બહાર પાડવામાં આવ્યું છે,
+
+                        ભાવનગર જિલ્લાના શિહોર ગામની સર્વે નં.282 ની શિહોર - ટાણા રોડની દક્ષિણ બાજુએ આવેલ જમીન કે જેનો ઉપયોગ હાલ ફાયરિંગ બટ માટે થાય છે આ ફાયરિંગ બટ ખાતે આગામી તા.31/05/2021 સુધીના સમયગાળા દરમ્યાન ભાવનગર જિલ્લાના તમામ પોલીસ સ્ટેશનમાં ફરજ બજાવતાં પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે.
+
+                        "
+                            android:textColor="@color/color_title_desc" />
 
                         <LinearLayout
                             android:layout_width="match_parent"

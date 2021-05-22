@@ -49,7 +49,8 @@ public class NewsDetail extends AppCompatActivity {
     RecyclerView rvOtherStories;
     List<News.Data> list;
     SliderView img_slider;
-    TextView txt_tag, txt_title, txt_name, txt_desc, txt_date;
+    TextView txt_tag, txt_title, txt_name, txt_date;
+    TextView txt_desc;
     LinearLayout llNewsDetailContent;
     NestedScrollView nsvRoot;
     ProgressBar pbNewsDetail;
@@ -59,7 +60,7 @@ public class NewsDetail extends AppCompatActivity {
     private String newsCatId = "";
     private Handler handler = null;
     private Runnable runnableCode = null;
-    private OtherStoryAdapter mAdapter;
+    private OtherStoryAdapter otherStoryAdapter;
     private SimpleSliderAdapter adapter;
 
     @Override
@@ -123,13 +124,13 @@ public class NewsDetail extends AppCompatActivity {
             public void onResponse(Call<News> call, Response<News> response) {
                 if (response.body() != null) {
                     if (response.body().getSuccess()) {
-                        list = (ArrayList<News.Data>) response.body().getData();
+                        list = response.body().getData();
                         // Other Stories
-                        mAdapter = new OtherStoryAdapter(list, NewsDetail.this);
+                        otherStoryAdapter = new OtherStoryAdapter(list, NewsDetail.this);
                         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
                         rvOtherStories.setLayoutManager(mLayoutManager);
                         rvOtherStories.setItemAnimator(new DefaultItemAnimator());
-                        rvOtherStories.setAdapter(mAdapter);
+                        rvOtherStories.setAdapter(otherStoryAdapter);
                     } else {
                         Toast.makeText(NewsDetail.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }
@@ -246,8 +247,11 @@ public class NewsDetail extends AppCompatActivity {
         txt_title.setText(newsData.getName().trim());
         txt_name.setText(newsData.getUpload_by());
         txt_date.setText(newsData.getPdate());
-        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
-        txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
+//        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
+//        txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
+        txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY));
+        //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());//todo work here
+
         if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
             ivBookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
         } else {

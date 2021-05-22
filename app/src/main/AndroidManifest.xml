@@ -17,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.Demo">
+            <!--                        <intent-filter>-->
+            <!--                            <action android:name="android.intent.action.MAIN" />-->
+
+            <!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--                        </intent-filter>-->
+        </activity>
         <activity
             android:name=".activities.IntroActivity"
             android:theme="@style/AppThemeNoActionBar">
@@ -39,25 +46,25 @@
 
         <activity
             android:name=".activities.Bookmark"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
         <activity
             android:name=".activities.OTP"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
         <activity
             android:name=".activities.SearchResult"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustNothing"></activity>
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".activities.Search"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.DetailScreen"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
         <activity android:name=".activities.NewsDetail" />
         <activity
             android:name=".activities.Profile"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
         <activity
             android:name=".activities.UploadStory"
             android:launchMode="standard">
@@ -70,19 +77,25 @@
         <activity
             android:name=".activities.Inquiry"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".activities.Signup"
             android:launchMode="standard">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".activities.Home"
-            android:launchMode="standard"></activity>
+            android:launchMode="standard" />
+        <activity
+            android:name=".activities.DisplayPictureActivity"
+            android:launchMode="standard"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>

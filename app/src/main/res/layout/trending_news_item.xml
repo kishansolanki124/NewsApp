@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lin_view"
-    android:layout_width="300dp"
+    android:layout_width="@dimen/dp_300"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="10dp"
+    android:layout_marginEnd="@dimen/dp_10"
     android:background="@color/white"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="@dimen/dp_10">
 
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="@dimen/dp_300"
+        android:layout_height="@dimen/dp_200"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_photo"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/rounded_corner"
             android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher"
             app:riv_border_color="#FFFFFF"
@@ -25,7 +26,8 @@
             app:riv_corner_radius="8dip"
             app:riv_mutate_background="true"
             app:riv_oval="false"
-            app:riv_tile_mode="clamp" />
+            app:riv_tile_mode="clamp"
+            tools:background="@drawable/rounded_corner" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_title"
@@ -37,10 +39,10 @@
             android:paddingTop="10dp"
             android:paddingRight="10dp"
             android:paddingBottom="10dp"
-            android:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Sara Ali Khan and Tara Sutariya Will be inspire you shope the chikankari Kurtas" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_numnews"
@@ -53,8 +55,8 @@
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="1/5"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_14" />
+            android:textSize="@dimen/sp_14"
+            tools:text="1/5" />
     </RelativeLayout>
 </LinearLayout>

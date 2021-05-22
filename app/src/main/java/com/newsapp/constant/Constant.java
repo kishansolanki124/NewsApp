@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -62,6 +61,10 @@ public class Constant {
     public static final String AUTHER = MIAN_DOMAIN + "newsapp/uploads/author_img/";
     public static final String BANNER = MIAN_DOMAIN + "newsapp/uploads/banner_img/";
     public static final String LOGO = MIAN_DOMAIN + "newsapp/uploads/logo_img/logo.png";
+
+    public static final String IMAGE_LIST = "IMAGE_LIST";
+    public static final String IMAGE_URL = "IMAGE_URL";
+    public static final String IMAGE_POSITION = "IMAGE_POSITION";
 
     public static final String WS_REGISTER = BASE_URL + "save_user.php";
     public static final String WS_OTP = BASE_URL + "varify_otp.php";
@@ -392,36 +395,15 @@ public class Constant {
         }
     }
 
-    public static void showExitDialog(final Context context) {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-        dialog.setTitle("Confirmation");
-        dialog.setMessage("Are you sure, You wan to exit ?");
-        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                ((Activity) context).finishAffinity();
-
-//                Intent intent = new Intent(Intent.ACTION_MAIN);
-//                intent.addCategory(Intent.CATEGORY_HOME);
-//                context.startActivity(intent);
-//                ((Activity)context).finish();
-
-//                Intent intent = new Intent(context, Signup.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-//                        Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//                intent.putExtra("EXIT", true);
-//                context.startActivity(intent);
-//                ((Activity)context).finish();
-//                System.exit(0);
-            }
+    public static void showExitDialog(Context context) {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.AlertDialogTheme);
+        dialog.setTitle("Exit");
+        dialog.setMessage("Are you sure you want to exit?");
+        dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            ((Activity) context).finishAffinity();
         });
-        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        dialog.setNegativeButton("No", (dialogInterface, i) -> {
 
-            }
         });
         dialog.show();
     }
@@ -430,26 +412,20 @@ public class Constant {
         AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setTitle("Update");
         dialog.setMessage(Constant.get_sp(context, Constant.Updatemsg));
-        dialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                final String appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
-                try {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(get_sp(context, Update_link))));
-                } catch (android.content.ActivityNotFoundException anfe) {
-                    anfe.printStackTrace();
-                }
+        dialog.setPositiveButton("Update", (dialogInterface, i) -> {
+            //final String appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
+            try {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(get_sp(context, Update_link))));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                anfe.printStackTrace();
             }
         });
         if (ForcedUpdate) {
             dialog.setCancelable(false);
         }
         if (!ForcedUpdate) {
-            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            dialog.setNegativeButton("Cancel", (dialogInterface, i) -> {
 
-                }
             });
         }
         dialog.show();

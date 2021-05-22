@@ -28,13 +28,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.MyViewHolder> {
-    private final List<News.Data> moviesList;
-    private final List<News.Data> moviesList_tranding;
+    private final List<News.Data> newsList;
+    private final List<News.Data> trendingNewsList;
     private final Context context;
 
-    public SearchResultAdapter(List<News.Data> moviesList, List<News.Data> moviesList_tranding, Context context) {
-        this.moviesList = moviesList;
-        this.moviesList_tranding = moviesList_tranding;
+    public SearchResultAdapter(List<News.Data> newsList, List<News.Data> trendingNewsList, Context context) {
+        this.newsList = newsList;
+        this.trendingNewsList = trendingNewsList;
         this.context = context;
     }
 
@@ -46,21 +46,26 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return new MyViewHolder(itemView);
     }
 
+    public void setTrendingNews(ArrayList<News.Data> trendingNewsList){
+        this.trendingNewsList.clear();
+        this.trendingNewsList.addAll(trendingNewsList);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        if (moviesList.get(position).getView_type() == 0) {
+        if (newsList.get(position).getView_type() == 0) {
             //if (moviesList.get(position).getName() != null) {
             holder.lin_view.setTag(position);
-            holder.txt_name.setText(moviesList.get(position).getUpload_by());
-            holder.txt_title.setText(moviesList.get(position).getName());
-            holder.txt_tag.setText(moviesList.get(position).getKeywords().toUpperCase());
-            if (moviesList.get(position).getKeywords().isEmpty()) {
+            holder.txt_name.setText(newsList.get(position).getUpload_by());
+            holder.txt_title.setText(newsList.get(position).getName());
+            holder.txt_tag.setText(newsList.get(position).getKeywords().toUpperCase());
+            if (newsList.get(position).getKeywords().isEmpty()) {
                 holder.txt_tag.setVisibility(View.GONE);
             }
-            holder.txt_tag.setOnClickListener(view -> Search.gotoSearchPage(context, "", moviesList.get(position).getCid(), "", "", "", moviesList.get(position).getKeywords()));
+            holder.txt_tag.setOnClickListener(view -> Search.gotoSearchPage(context, "", newsList.get(position).getCid(), "", "", "", newsList.get(position).getKeywords()));
 //        if (!moviesList.get(position).getUp_pro_img().equalsIgnoreCase("")) {
             Picasso.with(context)
-                    .load(Constant.POST + moviesList.get(position).getUp_pro_img())
+                    .load(Constant.POST + newsList.get(position).getUp_pro_img())
                     .error(R.drawable.error_load)
                     .placeholder(R.drawable.loading)
                     .into(holder.img_photo);
@@ -68,38 +73,38 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             holder.img_photo.setVisibility(View.VISIBLE);
 
             Picasso.with(context)
-                    .load(Constant.AUTHER + moviesList.get(position).getAuthor_img())
+                    .load(Constant.AUTHER + newsList.get(position).getAuthor_img())
                     .error(R.drawable.user_icon)
                     .placeholder(R.drawable.user_icon)
                     .into(holder.img_propic);
             holder.lin_view.setOnClickListener(view -> {
-                News.Data newsData = moviesList.get((Integer) view.getTag());
+                News.Data newsData = newsList.get((Integer) view.getTag());
                 //context.startActivity(new Intent(context, DetailScreen.class).putExtra("newsDetails", (Serializable) newsData));
                 context.startActivity(new Intent(context, NewsDetail.class).putExtra(Constant.NEWS_ID, Integer.parseInt(newsData.getId())));
             });
             ArrayList<Object> obj = new ArrayList<>();
             obj.add(holder.img_bookmark);
             obj.add(position);
-            holder.txt_date.setText(moviesList.get(position).getPdate());
+            holder.txt_date.setText(newsList.get(position).getPdate());
             holder.img_bookmark.setTag(obj);
             holder.img_bookmark.setOnClickListener(view -> {
                 ArrayList<Object> obj1 = (ArrayList<Object>) view.getTag();
-                Constant.saveBookmark(context, moviesList.get((Integer) obj1.get(1)).getId(), Constant.get_sp(context, "mobile"), "");
-                if (moviesList.get((Integer) obj1.get(1)).getIsbookmark().equalsIgnoreCase("0")) {
+                Constant.saveBookmark(context, newsList.get((Integer) obj1.get(1)).getId(), Constant.get_sp(context, "mobile"), "");
+                if (newsList.get((Integer) obj1.get(1)).getIsbookmark().equalsIgnoreCase("0")) {
                     ((ImageView) view).setImageResource(R.drawable.ic_baseline_bookmark_24);
-                    moviesList.get((Integer) obj1.get(1)).setIsbookmark("1");
+                    newsList.get((Integer) obj1.get(1)).setIsbookmark("1");
                 } else {
                     ((ImageView) view).setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
-                    moviesList.get((Integer) obj1.get(1)).setIsbookmark("0");
+                    newsList.get((Integer) obj1.get(1)).setIsbookmark("0");
                 }
             });
-            if (moviesList.get(position).getIsbookmark().equalsIgnoreCase("1")) {
+            if (newsList.get(position).getIsbookmark().equalsIgnoreCase("1")) {
                 holder.img_bookmark.setImageResource(R.drawable.ic_baseline_bookmark_24);
             }
             holder.img_share.setTag(position);
             holder.img_share.setOnClickListener(view -> {
-                String shareBody = "*" + HtmlCompat.fromHtml(moviesList.get(position).getName(), HtmlCompat.FROM_HTML_MODE_COMPACT) + "*\n\n" + HtmlCompat.fromHtml(moviesList.get(position).getDescription().substring(0, Math.min(moviesList.get(position).getDescription().length(), Constant.ShareDescWords)) + "...\n\n" + Constant.get_sp(context, Constant.Postsharemsg), HtmlCompat.FROM_HTML_MODE_COMPACT);
-                Constant.shareImage(context, shareBody, Constant.POST + moviesList.get(position).getUp_pro_img(), null);
+                String shareBody = "*" + HtmlCompat.fromHtml(newsList.get(position).getName(), HtmlCompat.FROM_HTML_MODE_COMPACT) + "*\n\n" + HtmlCompat.fromHtml(newsList.get(position).getDescription().substring(0, Math.min(newsList.get(position).getDescription().length(), Constant.ShareDescWords)) + "...\n\n" + Constant.get_sp(context, Constant.Postsharemsg), HtmlCompat.FROM_HTML_MODE_COMPACT);
+                Constant.shareImage(context, shareBody, Constant.POST + newsList.get(position).getUp_pro_img(), null);
             });
             holder.lin_trading_story.setVisibility(View.GONE);
             holder.ivAd.setVisibility(View.GONE);
@@ -108,7 +113,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             holder.rlImageBottom.setVisibility(View.VISIBLE);
             holder.txt_title.setVisibility(View.VISIBLE);
             holder.llNewsPostedBy.setVisibility(View.VISIBLE);
-        } else if (moviesList.get(position).getView_type() == 2) {
+        } else if (newsList.get(position).getView_type() == 2) {
             holder.lin_mainlayout.setVisibility(View.VISIBLE);
             holder.ivAd.setVisibility(View.VISIBLE);
             holder.img_photo.setVisibility(View.GONE);
@@ -118,23 +123,24 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             holder.llNewsPostedBy.setVisibility(View.GONE);
 
             Picasso.with(context)
-                    .load(Constant.BANNER + moviesList.get(position).getUp_pro_img())
+                    .load(Constant.BANNER + newsList.get(position).getUp_pro_img())
                     .error(R.drawable.error_load)
                     .placeholder(R.drawable.loading)
                     .into(holder.ivAd);
-            holder.ivAd.setOnClickListener(view -> AppUtilsKt.browserIntent(context, moviesList.get(position).getUrl()));
+            holder.ivAd.setOnClickListener(view -> AppUtilsKt.browserIntent(context, newsList.get(position).getUrl()));
         } else {
             holder.ivAd.setVisibility(View.GONE);
             holder.lin_mainlayout.setVisibility(View.GONE);
             holder.lin_trading_story.setVisibility(View.VISIBLE);
-            if (moviesList_tranding.size() == 0) {
+            if (trendingNewsList.size() == 0) {
                 holder.lin_trading_story.setVisibility(View.GONE);
             }
-            TrandingAdapter mAdapter = new TrandingAdapter(moviesList_tranding, context);
+            TrendingNewsAdapter mAdapter = new TrendingNewsAdapter(trendingNewsList, context);
             holder.rec_tranding.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             holder.rec_tranding.setItemAnimator(new DefaultItemAnimator());
             holder.rec_tranding.setAdapter(mAdapter);
         }
+
         if (holder.lin_mainlayout.getVisibility() == View.GONE) {
             holder.lin_trading_story.setVisibility(View.VISIBLE);
         }
@@ -142,7 +148,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     @Override
     public int getItemCount() {
-        return moviesList.size();
+        return newsList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

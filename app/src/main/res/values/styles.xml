@@ -12,4 +12,8 @@
     <style name="AppThemeNoActionBar" parent="Theme.Design.NoActionBar">
         <item name="android:statusBarColor">@color/pink</item>
     </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/pink</item>
+    </style>
 </resources>

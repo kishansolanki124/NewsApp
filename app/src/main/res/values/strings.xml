@@ -21,4 +21,10 @@
     <string name="Tending_Story">Trending Story</string>
     <string name="no_record_found">No Record Found.!</string>
     <string name="loading">Loading...</string>
+    <string name="Home">Home</string>
+    <string name="Search">Search</string>
+    <string name="Upload">Upload</string>
+    <string name="Profile">Profile</string>
+    <string name="For_You">For You</string>
+    <string name="Loading">Loading...</string>
 </resources>

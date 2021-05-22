@@ -128,8 +128,8 @@ public class Signup extends AppCompatActivity {
                         intent.putExtra("otp", response.body().getOtp());
                         intent.putExtra("name", response.body().getName());
                         startActivity(intent);
-                        Toast.makeText(Signup.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(Signup.this, "OTP : " + response.body().getOtp(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Signup.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Signup.this, "OTP : " + response.body().getOtp(), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(Signup.this, response.body().getMsg(), Toast.LENGTH_SHORT).show();
                     }

@@ -60,7 +60,7 @@ public class OTP extends AppCompatActivity {
                 if (!edt_otp.getText().toString().equals(otp)) {
                     isValid = true;
                     msg = "OTP Invalid.!";
-                    //Toast.makeText(OTP.this, msg, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OTP.this, msg, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (isValid) {

@@ -25,6 +25,6 @@
             android:layout_marginTop="10dp"
             android:text="Things to Do"
             android:textColor="@color/color_title_desc"
-            android:textSize="11dp"/>
+            android:textSize="@dimen/sp_12"/>
         </LinearLayout>
     </LinearLayout>
