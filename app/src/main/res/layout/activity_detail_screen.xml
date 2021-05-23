@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -68,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/llNewsDetailContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -105,7 +106,7 @@
                             android:layout_marginEnd="10dp"
                             android:orientation="horizontal">
 
-                            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/img_profile"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
@@ -144,19 +145,41 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dp_10"
                             android:justificationMode="inter_word"
-                            android:autoLink="web"
                             android:lineSpacingMultiplier="1.1"
-                            android:text="ભાવનગર જિલ્લાના સિહોર ગામની પાસે આવેલ સિહોર-ટાણા રોડની પર આવેલ જમીન પર પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે, જેને લઈ વિસ્તારની આજુબાજુના 100 મીટર સુધીના વિસ્તારમાં કોઈપણ શખ્સે પ્રવેશ કરવા તથા ઢોર ચરાવવા બાબતે પ્રતિબંધ મૂકતું જાહેરનામું બહાર પાડવામાં આવ્યું છે,
+                            android:textColor="@color/color_title_desc"
+                            android:textColorLink="@color/color_title_desc"
+                            tools:text="ભાવનગર જિલ્લાના સિહોર ગામની પાસે આવેલ સિહોર-ટાણા રોડની પર આવેલ જમીન પર પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે, જેને લઈ વિસ્તારની આજુબાજુના 100 મીટર સુધીના વિસ્તારમાં કોઈપણ શખ્સે" />
 
-                        ભાવનગર જિલ્લાના શિહોર ગામની સર્વે નં.282 ની શિહોર - ટાણા રોડની દક્ષિણ બાજુએ આવેલ જમીન કે જેનો ઉપયોગ હાલ ફાયરિંગ બટ માટે થાય છે આ ફાયરિંગ બટ ખાતે આગામી તા.31/05/2021 સુધીના સમયગાળા દરમ્યાન ભાવનગર જિલ્લાના તમામ પોલીસ સ્ટેશનમાં ફરજ બજાવતાં પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે.
-
-                        "
-                            android:textColor="@color/color_title_desc" />
-
-                        <LinearLayout
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/llWebsite"
                             android:layout_width="match_parent"
-                            android:layout_height="10dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/dp_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/dp_20"
+                                android:layout_height="@dimen/dp_20"
+                                android:src="@drawable/web"
+                                app:tint="@color/pink" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvWebsiteLink"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:autoLink="web"
+                                android:paddingHorizontal="@dimen/dp_10"
+                                android:textColorLink="@color/pink"
+                                android:textSize="@dimen/sp_12"
+                                tools:text="https://www.google.com/" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_10"
                             android:background="@color/gray" />
 
                         <LinearLayout
@@ -169,7 +192,7 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Other Stories"
+                                android:text="@string/Other_Stories"
                                 android:textSize="@dimen/sp_22"
                                 android:textStyle="bold" />
 
@@ -179,7 +202,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="10dp" />
                         </LinearLayout>
-                    </LinearLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <ProgressBar
                         android:id="@+id/pbNewsDetail"

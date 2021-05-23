@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.newsapp.R;
-import com.newsapp.activities.DetailScreen;
+import com.newsapp.activities.NewsDetail;
 import com.newsapp.constant.Constant;
 import com.newsapp.model.News;
 import com.squareup.picasso.Picasso;
@@ -45,7 +45,8 @@ public class OtherStoryAdapter extends RecyclerView.Adapter<OtherStoryAdapter.My
         holder.txtlabel.setText(moviesList.get(position).getKeywords().trim().toUpperCase());
         holder.lin_view.setOnClickListener(view -> {
             News.Data newsData = moviesList.get((Integer) view.getTag());
-            context.startActivity(new Intent(context, DetailScreen.class).putExtra("newsDetails", newsData));
+            //context.startActivity(new Intent(context, DetailScreen.class).putExtra("newsDetails", newsData));
+            context.startActivity(new Intent(context, NewsDetail.class).putExtra(Constant.NEWS_ID, Integer.parseInt(newsData.getId())));
         });
 //        if (!moviesList.get(position).getUp_pro_img().equalsIgnoreCase("")) {
         Picasso.with(context)

@@ -2,15 +2,14 @@ package com.newsapp.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.lifecycle.Lifecycle;
@@ -49,9 +48,9 @@ public class NewsDetail extends AppCompatActivity {
     RecyclerView rvOtherStories;
     List<News.Data> list;
     SliderView img_slider;
-    TextView txt_tag, txt_title, txt_name, txt_date;
+    TextView txt_tag, txt_title, txt_name, txt_date, tvWebsiteLink;
     TextView txt_desc;
-    LinearLayout llNewsDetailContent;
+    LinearLayoutCompat llNewsDetailContent, llWebsite;
     NestedScrollView nsvRoot;
     ProgressBar pbNewsDetail;
     ImageView img_profile, img_share, img_back, ivBookmark;
@@ -89,8 +88,10 @@ public class NewsDetail extends AppCompatActivity {
         img_back = findViewById(R.id.img_back);
         ivBookmark = findViewById(R.id.imgbookmark);
         txt_date = findViewById(R.id.txt_date);
+        tvWebsiteLink = findViewById(R.id.tvWebsiteLink);
 
         llNewsDetailContent = findViewById(R.id.llNewsDetailContent);
+        llWebsite = findViewById(R.id.llWebsite);
         nsvRoot = findViewById(R.id.nsvRoot);
         pbNewsDetail = findViewById(R.id.pbNewsDetail);
 
@@ -262,6 +263,11 @@ public class NewsDetail extends AppCompatActivity {
                 .error(R.drawable.user_icon)
                 .placeholder(R.drawable.user_icon)
                 .into(img_profile);
+
+        if (!newsData.getWeb_link().isEmpty()) {
+            llWebsite.setVisibility(View.VISIBLE);
+            tvWebsiteLink.setText(newsData.getWeb_link());
+        }
 
         txt_tag.setOnClickListener(view -> Search.gotoSearchPage(NewsDetail.this, "", newsData.getCid(),
                 "", "", "", newsData.getKeywords()));

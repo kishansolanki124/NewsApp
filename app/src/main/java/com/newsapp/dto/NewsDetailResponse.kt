@@ -23,6 +23,7 @@ data class NewsDetailResponse(
         var up_pro_img: String = "",
         var upload_by: String = "",
         var user_mobile: String = "",
+        var web_link: String = "",
         var isbookmark: String = ""
     )
 }

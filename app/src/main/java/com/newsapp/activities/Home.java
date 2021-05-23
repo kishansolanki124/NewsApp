@@ -669,6 +669,8 @@ public class Home extends AppCompatActivity implements ViewPagerEx.OnPageChangeL
         rec_for_you.setLayoutManager(rvLayoutManager);
         newsListAdapter = new SearchResultAdapter(regularNewsList, trendingNewsList, this);
         rec_for_you.setAdapter(newsListAdapter);
+        //disable blink/spark when item refreshed by notifyItemChanged
+        rec_for_you.setItemAnimator(null);
 
         nsvRoot.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (v.getChildAt(v.getChildCount() - 1) != null) {

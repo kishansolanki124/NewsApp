@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -49,7 +51,8 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
     RecyclerView rec_otherstory;
     List<News.Data> list;
     SliderView img_slider;
-    TextView txt_tag, txt_title, txt_name, txt_desc, txt_date;
+    TextView txt_tag, txt_title, txt_name, txt_desc, txt_date, tvWebsiteLink;
+    LinearLayoutCompat llWebsite;
     ImageView img_profile, img_share, img_back, imgbookmark;
     ProgressDialog pb;
     News.Data newsData;
@@ -82,6 +85,9 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         imgbookmark = findViewById(R.id.imgbookmark);
         txt_date = findViewById(R.id.txt_date);
 
+        tvWebsiteLink = findViewById(R.id.tvWebsiteLink);
+        llWebsite = findViewById(R.id.llWebsite);
+
         newsData = (News.Data) getIntent().getSerializableExtra("newsDetails");
 
         txt_tag.setText(newsData.getKeywords().toUpperCase());
@@ -91,7 +97,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         //txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription().trim(), 0));
         //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
         txt_desc.setText(HtmlCompat.fromHtml(newsData.getDescription(), HtmlCompat.FROM_HTML_MODE_LEGACY));
-        //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());//todo work here
+        //txt_desc.setMovementMethod(LinkMovementMethod.getInstance());
 
         if (newsData.getIsbookmark().equalsIgnoreCase("0")) {
             imgbookmark.setImageResource(R.drawable.ic_baseline_bookmark_gray_border_24);
@@ -103,6 +109,11 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
                 .error(R.drawable.user_icon)
                 .placeholder(R.drawable.user_icon)
                 .into(img_profile);
+
+        if (null != newsData.getWeb_link() && !newsData.getWeb_link().isEmpty()) {
+            llWebsite.setVisibility(View.VISIBLE);
+            tvWebsiteLink.setText(newsData.getWeb_link());
+        }
 //        Picasso.with(getApplicationContext())
 //                .load(Constant.AUTHER+data.getAuthor_img())
 //                .error(R.drawable.error_load)

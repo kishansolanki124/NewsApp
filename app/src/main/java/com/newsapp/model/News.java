@@ -108,6 +108,8 @@ public class News {
         private String id;
         @SerializedName("isbookmark")
         private String isbookmark;
+        @SerializedName("web_link")
+        private String web_link;
         private String numRecords;
         private String url;
 
@@ -269,6 +271,14 @@ public class News {
 
         public void setIsbookmark(String isbookmark) {
             this.isbookmark = isbookmark;
+        }
+
+        public String getWeb_link() {
+            return web_link;
+        }
+
+        public void setWeb_link(String web_link) {
+            this.web_link = web_link;
         }
     }
 }
