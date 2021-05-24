@@ -38,7 +38,7 @@ public class Profile extends AppCompatActivity {
         txt_welcome=findViewById(R.id.txt_welcome);
 
         Picasso.with(getApplicationContext())
-                .load(Constant.LOGO)
+                .load(Constant.get_sp(getApplicationContext(), Constant.APP_LOGO))
                 .error(R.drawable.error_load)
                 .placeholder(R.drawable.loading)
                 .into(img_logo);

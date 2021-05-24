@@ -3,6 +3,7 @@ package com.newsapp.dto
 data class IntroResponseModel(
     var home_banner: List<HomeBanner> = listOf(),
     var msg: String = "",
+    var logo: String = "",
     var success: Boolean = false
 ) {
     data class HomeBanner(

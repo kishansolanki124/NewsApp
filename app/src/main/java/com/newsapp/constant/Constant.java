@@ -60,7 +60,7 @@ public class Constant {
     public static final String POST = MIAN_DOMAIN + "newsapp/uploads/news_img/";
     public static final String AUTHER = MIAN_DOMAIN + "newsapp/uploads/author_img/";
     public static final String BANNER = MIAN_DOMAIN + "newsapp/uploads/banner_img/";
-    public static final String LOGO = MIAN_DOMAIN + "newsapp/uploads/logo_img/logo.png";
+    //public static final String LOGO = MIAN_DOMAIN + "newsapp/uploads/logo_img/logo.png";
 
     public static final String IMAGE_LIST = "IMAGE_LIST";
     public static final String IMAGE_URL = "IMAGE_URL";
@@ -87,6 +87,7 @@ public class Constant {
     public static int ShareDescWords = 50;
     //********** SP ***************************
     public static String Android_version = "Android_version";
+    public static String APP_LOGO = "APP_LOGO";
     public static String Appsharemsg = "Appsharemsg";
     public static String Isfourceupdate = "Isfourceupdate";
     public static String Postsharemsg = "Postsharemsg";
@@ -97,18 +98,15 @@ public class Constant {
     public static void save_sp(Context context, String name, String mobile) {
         SharedPreferences.Editor SPEdit = context.getSharedPreferences("App", Context.MODE_PRIVATE).edit();
         SPEdit.putString("name", name);
-        SPEdit.commit();
         SPEdit.apply();
         SharedPreferences.Editor SPEdit1 = context.getSharedPreferences("App", Context.MODE_PRIVATE).edit();
         SPEdit1.putString("mobile", mobile);
-        SPEdit1.commit();
         SPEdit1.apply();
     }
 
     public static void save_sp_genral(Context context, String key, String val) {
         SharedPreferences.Editor SPEdit = context.getSharedPreferences("App", Context.MODE_PRIVATE).edit();
         SPEdit.putString(key, val);
-        SPEdit.commit();
         SPEdit.apply();
     }
 

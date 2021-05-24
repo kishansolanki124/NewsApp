@@ -54,7 +54,7 @@ public class Signup extends AppCompatActivity {
         img_logo = findViewById(R.id.img_logo);
         Init();
         Picasso.with(getApplicationContext())
-                .load(Constant.LOGO)
+                .load(Constant.get_sp(getApplicationContext(), Constant.APP_LOGO))
                 .error(R.drawable.error_load)
                 .placeholder(R.drawable.loading)
                 .into(img_logo);

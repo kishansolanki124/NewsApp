@@ -41,7 +41,7 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)
 
-        setupLogo()
+        //setupLogo()
         fetchIntroImages()
 
         btGetStarted.setOnClickListener {
@@ -55,7 +55,7 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupLogo() {
+    private fun setupLogo(logo: String) {
         val circularProgressDrawable = CircularProgressDrawable(this)
         circularProgressDrawable.strokeWidth = 5f
         circularProgressDrawable.centerRadius = 30f
@@ -78,8 +78,10 @@ class IntroActivity : AppCompatActivity() {
 
         circularProgressDrawable.start()
 
+        Constant.save_sp_genral(applicationContext, Constant.APP_LOGO, logo)
+
         Picasso.with(applicationContext)
-            .load(Constant.LOGO)
+            .load(logo)
             .error(R.drawable.error_load)
             .placeholder(circularProgressDrawable)
             .into(ivAppLogo)
@@ -110,6 +112,7 @@ class IntroActivity : AppCompatActivity() {
                 if (response.body() != null) {
                     if (response.body()!!.success) {
                         setupOffersViewPager(response.body()!!.home_banner)
+                        setupLogo(response.body()!!.logo)
                     } else {
                         Toast.makeText(
                             this@IntroActivity,

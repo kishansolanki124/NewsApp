@@ -74,7 +74,7 @@ public class Inquiry extends AppCompatActivity {
         Init();
 
         Picasso.with(getApplicationContext())
-                .load(Constant.LOGO)
+                .load(Constant.get_sp(getApplicationContext(), Constant.APP_LOGO))
                 .error(R.drawable.error_load)
                 .placeholder(R.drawable.loading)
                 .into(imglogo);

@@ -48,7 +48,7 @@ public class OTP extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         otp = getIntent().getIntExtra("otp", 0) + "";
         Picasso.with(getApplicationContext())
-                .load(Constant.LOGO)
+                .load(Constant.get_sp(getApplicationContext(), Constant.APP_LOGO))
                 .error(R.drawable.error_load)
                 .placeholder(R.drawable.loading)
                 .into(img_logo);
