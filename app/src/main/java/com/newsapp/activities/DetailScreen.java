@@ -3,10 +3,8 @@ package com.newsapp.activities;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.newsapp.AppUtilsKt;
 import com.newsapp.R;
+import com.newsapp.adpter.NewsTagAdapter;
 import com.newsapp.adpter.OtherStoryAdapter;
 import com.newsapp.adpter.SimpleSliderAdapter;
 import com.newsapp.api.ApiListeners;
@@ -49,8 +51,10 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
 
     public ApiListeners apiListeners;
     RecyclerView rec_otherstory;
+    NewsTagAdapter newsTagAdapter;
     List<News.Data> list;
     SliderView img_slider;
+    RecyclerView rvNewsTags;
     TextView txt_tag, txt_title, txt_name, txt_desc, txt_date, tvWebsiteLink;
     LinearLayoutCompat llWebsite;
     ImageView img_profile, img_share, img_back, imgbookmark;
@@ -72,6 +76,7 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
             finish();
         }
         ar_sliders = new ArrayList<>();
+        rvNewsTags = findViewById(R.id.rvNewsTags);
         rec_otherstory = findViewById(R.id.rec_otherstory);
         img_slider = findViewById(R.id.img_slider);
         Init();
@@ -148,6 +153,11 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         getOtherStories();
         getSliders();
         getPopupBanner();
+        if (!newsData.getTags().isEmpty()) {
+            setupNewsTags(newsData.getTags());
+        } else {
+            rvNewsTags.setVisibility(View.GONE);
+        }
     }
 
     private void Init() {
@@ -335,6 +345,17 @@ public class DetailScreen extends AppCompatActivity implements ViewPagerEx.OnPag
         if (!isDestroyed() && (!(DetailScreen.this).isFinishing())) {
             handler.postDelayed(runnableCode, Long.parseLong(initialDelayTime) * 1000);
         }
+    }
+
+    void setupNewsTags(String tags) {
+        rvNewsTags.setVisibility(View.VISIBLE);
+        newsTagAdapter = new NewsTagAdapter(AppUtilsKt.commaSeparatedStringtoArrayList(tags), this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW_REVERSE);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
+        rvNewsTags.setLayoutManager(layoutManager);
+        rvNewsTags.setItemAnimator(new DefaultItemAnimator());
+        rvNewsTags.setAdapter(newsTagAdapter);
     }
 
     @Override

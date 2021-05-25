@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.newsapp.constant.Constant
 import com.newsapp.dto.PopupBannerResponse
 import com.squareup.picasso.Picasso
+import java.util.*
 
 fun Context.showToast(string: String) {
     Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
@@ -132,4 +133,8 @@ fun browserIntent(context: Context, url: String) {
     if (intent.resolveActivity(context.packageManager) != null) {
         context.startActivity(intent)
     }
+}
+
+fun commaSeparatedStringtoArrayList(string: String) : List<String> {
+    return string.split(", ")
 }

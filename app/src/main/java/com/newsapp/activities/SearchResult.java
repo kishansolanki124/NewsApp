@@ -174,6 +174,7 @@ public class SearchResult extends AppCompatActivity implements ViewPagerEx.OnPag
                             obj.setCity(response.body().getData().get(i).getCity());
                             obj.setId(response.body().getData().get(i).getId());
                             obj.setKeywords(response.body().getData().get(i).getKeywords());
+                            obj.setTags(response.body().getData().get(i).getTags());
                             obj.setName(response.body().getData().get(i).getName());
                             obj.setPdate(response.body().getData().get(i).getPdate());
                             obj.setSlider(response.body().getData().get(i).getSlider());

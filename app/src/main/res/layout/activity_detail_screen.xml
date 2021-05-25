@@ -150,6 +150,12 @@
                             android:textColorLink="@color/color_title_desc"
                             tools:text="ભાવનગર જિલ્લાના સિહોર ગામની પાસે આવેલ સિહોર-ટાણા રોડની પર આવેલ જમીન પર પોલીસ અધિકારી, કર્મચારીઓનું સને-2021નું અર્ધ વાર્ષિક ફાયરીંગ પ્રેક્ટીસનું આયોજન કરવામાં આવેલ છે, જેને લઈ વિસ્તારની આજુબાજુના 100 મીટર સુધીના વિસ્તારમાં કોઈપણ શખ્સે" />
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvNewsTags"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/llWebsite"
                             android:layout_width="match_parent"

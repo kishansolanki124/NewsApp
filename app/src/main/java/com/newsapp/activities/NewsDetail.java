@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.newsapp.AppUtilsKt;
 import com.newsapp.R;
+import com.newsapp.adpter.NewsTagAdapter;
 import com.newsapp.adpter.OtherStoryAdapter;
 import com.newsapp.adpter.SimpleSliderAdapter;
 import com.newsapp.api.ApiListeners;
@@ -45,6 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsDetail extends AppCompatActivity {
     public ApiListeners apiListeners;
+    NewsTagAdapter newsTagAdapter;
     RecyclerView rvOtherStories;
     List<News.Data> list;
     SliderView img_slider;
@@ -52,6 +57,7 @@ public class NewsDetail extends AppCompatActivity {
     TextView txt_desc;
     LinearLayoutCompat llNewsDetailContent, llWebsite;
     NestedScrollView nsvRoot;
+    RecyclerView rvNewsTags;
     ProgressBar pbNewsDetail;
     ImageView img_profile, img_share, img_back, ivBookmark;
     ArrayList<String> ar_sliders;
@@ -77,6 +83,7 @@ public class NewsDetail extends AppCompatActivity {
         init();
 
         ar_sliders = new ArrayList<>();
+        rvNewsTags = findViewById(R.id.rvNewsTags);
         rvOtherStories = findViewById(R.id.rec_otherstory);
         img_slider = findViewById(R.id.img_slider);
         txt_tag = findViewById(R.id.txt_tag);
@@ -294,6 +301,11 @@ public class NewsDetail extends AppCompatActivity {
         ar_sliders.add(newsData.getUp_pro_img());
         getOtherStories();
         getSliders();
+        if (!newsData.getTags().isEmpty()) {
+            setupNewsTags(newsData.getTags());
+        } else {
+            rvNewsTags.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -345,6 +357,17 @@ public class NewsDetail extends AppCompatActivity {
         if (!isDestroyed() && (!(NewsDetail.this).isFinishing())) {
             handler.postDelayed(runnableCode, Long.parseLong(initialDelayTime) * 1000);
         }
+    }
+
+    void setupNewsTags(String tags) {
+        rvNewsTags.setVisibility(View.VISIBLE);
+        newsTagAdapter = new NewsTagAdapter(AppUtilsKt.commaSeparatedStringtoArrayList(tags), this);
+        FlexboxLayoutManager layoutManager = new FlexboxLayoutManager(this);
+        layoutManager.setFlexDirection(FlexDirection.ROW_REVERSE);
+        layoutManager.setJustifyContent(JustifyContent.FLEX_END);
+        rvNewsTags.setLayoutManager(layoutManager);
+        rvNewsTags.setItemAnimator(new DefaultItemAnimator());
+        rvNewsTags.setAdapter(newsTagAdapter);
     }
 
     @Override

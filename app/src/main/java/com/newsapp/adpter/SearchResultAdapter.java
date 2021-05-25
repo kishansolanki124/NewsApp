@@ -2,6 +2,7 @@ package com.newsapp.adpter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,10 +47,21 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return new MyViewHolder(itemView);
     }
 
-    public void setTrendingNews(ArrayList<News.Data> trendingNewsList){
+    public void setTrendingNews(ArrayList<News.Data> trendingNewsList) {
         this.trendingNewsList.clear();
         this.trendingNewsList.addAll(trendingNewsList);
     }
+
+//    public void add(News.Data news) {
+//        newsList.add(news);
+//        notifyItemInserted(newsList.size() - 1);
+//    }
+//
+//    public void addAll(List<News.Data> newsList) {
+//        for (News.Data result : newsList) {
+//            add(result);
+//        }
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
@@ -59,10 +71,22 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             holder.txt_name.setText(newsList.get(position).getUpload_by());
             holder.txt_title.setText(newsList.get(position).getName());
             holder.txt_tag.setText(newsList.get(position).getKeywords().toUpperCase());
+            if (null != newsList.get(position).getTags() && !newsList.get(position).getTags().isEmpty()) {
+                holder.txt_first_tag.setText(AppUtilsKt.commaSeparatedStringtoArrayList(newsList.get(position).getTags()).get(0));
+                holder.txt_first_tag.setVisibility(View.VISIBLE);
+            } else {
+                holder.txt_first_tag.setVisibility(View.GONE);
+            }
+
             if (newsList.get(position).getKeywords().isEmpty()) {
                 holder.txt_tag.setVisibility(View.GONE);
             }
             holder.txt_tag.setOnClickListener(view -> Search.gotoSearchPage(context, "", newsList.get(position).getCid(), "", "", "", newsList.get(position).getKeywords()));
+            holder.txt_first_tag.setOnClickListener(view -> Search.gotoSearchPage(
+                    context, "", "",
+                    AppUtilsKt.commaSeparatedStringtoArrayList(newsList.get(position).getTags()).get(0), "",
+                    "",
+                    AppUtilsKt.commaSeparatedStringtoArrayList(newsList.get(position).getTags()).get(0)));
 //        if (!moviesList.get(position).getUp_pro_img().equalsIgnoreCase("")) {
             Picasso.with(context)
                     .load(Constant.POST + newsList.get(position).getUp_pro_img())
@@ -114,6 +138,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             holder.txt_title.setVisibility(View.VISIBLE);
             holder.llNewsPostedBy.setVisibility(View.VISIBLE);
         } else if (newsList.get(position).getView_type() == 2) {
+            holder.txt_first_tag.setVisibility(View.GONE);
             holder.lin_mainlayout.setVisibility(View.VISIBLE);
             holder.ivAd.setVisibility(View.VISIBLE);
             holder.img_photo.setVisibility(View.GONE);
@@ -129,6 +154,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                     .into(holder.ivAd);
             holder.ivAd.setOnClickListener(view -> AppUtilsKt.browserIntent(context, newsList.get(position).getUrl()));
         } else {
+            holder.txt_first_tag.setVisibility(View.GONE);
             holder.ivAd.setVisibility(View.GONE);
             holder.lin_mainlayout.setVisibility(View.GONE);
             holder.lin_trading_story.setVisibility(View.VISIBLE);
@@ -152,7 +178,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txt_name, txt_title, txt_tag, txt_date;
+        public TextView txt_name, txt_title, txt_tag, txt_first_tag, txt_date;
         public ImageView img_photo, ivAd, img_share, img_bookmark, img_propic;
         public LinearLayout lin_view, lin_mainlayout, lin_trading_story, llNewsPostedBy;
         public RelativeLayout rlImageBottom;
@@ -163,6 +189,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             txt_name = view.findViewById(R.id.txt_name);
             txt_title = view.findViewById(R.id.txt_title);
             txt_tag = view.findViewById(R.id.txt_tag);
+            txt_first_tag = view.findViewById(R.id.txt_first_tag);
             txt_date = view.findViewById(R.id.txt_date);
             img_photo = view.findViewById(R.id.img_photo);
             ivAd = view.findViewById(R.id.ivAd);

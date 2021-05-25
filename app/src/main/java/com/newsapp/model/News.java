@@ -92,6 +92,8 @@ public class News {
         private String trending_news;
         @SerializedName("keywords")
         private String keywords;
+        @SerializedName("tags")
+        private String tags;
         @SerializedName("author")
         private String author;
         @SerializedName("up_pro_img")
@@ -279,6 +281,14 @@ public class News {
 
         public void setWeb_link(String web_link) {
             this.web_link = web_link;
+        }
+
+        public String getTags() {
+            return tags;
+        }
+
+        public void setTags(String tags) {
+            this.tags = tags;
         }
     }
 }

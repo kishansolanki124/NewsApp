@@ -14,6 +14,7 @@ data class NewsDetailResponse(
         var description: String = "",
         var id: String = "",
         var keywords: String = "",
+        var tags: String = "",
         var name: String = "",
         var pdate: String = "",
         var post_publish_type: String = "",
