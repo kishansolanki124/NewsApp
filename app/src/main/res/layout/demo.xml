@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.newsapp.apputils.CustomVerticalScrollView
+    <com.excuseme.newsapp.apputils.CustomVerticalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
@@ -163,7 +163,7 @@
                     android:textSize="@dimen/sp_20" />
             </LinearLayout>
         </LinearLayout>
-    </com.newsapp.apputils.CustomVerticalScrollView>
+    </com.excuseme.newsapp.apputils.CustomVerticalScrollView>
 
     <include layout="@layout/bottom_menu" />
 </LinearLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.newsapp">
+    package="com.excuseme.newsapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,7 +36,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.newsapp.fileprovider"
+            android:authorities="com.excuseme.newsapp.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -97,5 +97,4 @@
             android:launchMode="standard"
             android:theme="@style/AppThemeNoActionBar" />
     </application>
-
 </manifest>

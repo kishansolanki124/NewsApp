@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "279925687208",
+    "project_id": "newsapp-4d499",
+    "storage_bucket": "newsapp-4d499.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279925687208:android:6b6a9c70b0cb51ce6b539d",
+        "android_client_info": {
+          "package_name": "com.excuseme.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279925687208-5aht3gratudike6c81n9ga7gqdq2292v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2EuPYzfI7x1cmSW92NOWbbhAU56-FSTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279925687208-5aht3gratudike6c81n9ga7gqdq2292v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

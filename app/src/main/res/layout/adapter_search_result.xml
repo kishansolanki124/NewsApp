@@ -134,17 +134,17 @@
                     tools:text="Fashion" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:id="@+id/txt_first_tag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp_10"
                     android:layout_toEndOf="@id/txt_tag"
                     android:background="@drawable/tag_first"
                     android:padding="@dimen/dp_10"
+                    android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/sp_12"
                     tools:ignore="RelativeOverlap"
-                    android:textAllCaps="true"
                     tools:text="ratan tata" />
 
                 <androidx.appcompat.widget.AppCompatImageView
